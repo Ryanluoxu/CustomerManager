@@ -15,13 +15,13 @@ import javax.persistence.Table;
 @Table(name="customer_info")
 public class CustomerInfo implements Serializable{
 	private static final long serialVersionUID = 1200796892383975865L;
-	
+
 	@Id
 	@Column(name="customer_info_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_info_seq_gen")
 	@SequenceGenerator(name = "customer_info_seq_gen", sequenceName = "customer_info_id_seq", initialValue = 1, allocationSize = 1)
 	private Long customerInfoId;
-	
+
 	@Column(name="customer_name")
 	private String customerName;
 	@Column(name="function")
@@ -40,10 +40,17 @@ public class CustomerInfo implements Serializable{
 	private String contactFax;
 	@Column(name="address")
 	private String address;
-	
+	@Column(name="status")
+	private String status;
 	@Column(name="created_date")
 	private Date createdDate;
-	
+
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -110,5 +117,5 @@ public class CustomerInfo implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 }

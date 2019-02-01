@@ -1,12 +1,15 @@
 package io.ryanluoxu.customerManager.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.ryanluoxu.customerManager.StatusConstant;
+import io.ryanluoxu.customerManager.constant.StatusConstant;
 import io.ryanluoxu.customerManager.controller.CustomerInfoController;
 import io.ryanluoxu.customerManager.exception.CustomerInfoException;
 import io.ryanluoxu.customerManager.input.CustomerInfoInput;
@@ -19,7 +22,7 @@ public class CustomerInfoRestController {
 
 	@Autowired
 	private CustomerInfoController customerInfoController;
-	
+
 	@PostMapping("/add")
 	ResponseModel<CustomerInfoVO> add(@RequestBody CustomerInfoInput customerInfoInput){
 		ResponseModel<CustomerInfoVO> response = new ResponseModel<>();
@@ -34,7 +37,7 @@ public class CustomerInfoRestController {
 		}
 		return response;
 	}
-	
+
 	@PostMapping("/delete")
 	ResponseModel<CustomerInfoVO> delete(@RequestBody CustomerInfoInput customerInfoInput){
 		ResponseModel<CustomerInfoVO> response = new ResponseModel<>();
@@ -49,5 +52,19 @@ public class CustomerInfoRestController {
 		}
 		return response;
 	}
-	
+
+	@GetMapping("/findAll")
+	ResponseModel<List<CustomerInfoVO>> findAll(){
+		ResponseModel<List<CustomerInfoVO>> response = new ResponseModel<>();
+		try {
+			List<CustomerInfoVO> customerInfoVOs = customerInfoController.findAll();
+			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
+			response.setData(customerInfoVOs);
+		} catch (CustomerInfoException e) {
+			response.setStatus(StatusConstant.RESPONSE_FAIL);
+			response.setErrorMsg(e.getErrorMsg());
+		}
+		return response;
+	}
+
 }

@@ -1,37 +1,12 @@
-package io.ryanluoxu.customerManager.entity;
+package io.ryanluoxu.customerManager.input;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="order_info")
-public class OrderInfo implements Serializable{
-	private static final long serialVersionUID = 4218469077136023963L;
-
-	@Id
-	@Column(name="order_info_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_info_seq_gen")
-	@SequenceGenerator(name = "order_info_seq_gen", sequenceName = "order_info_id_seq", initialValue = 1, allocationSize = 1)
+public class OrderInfoInp {
 	private Long orderInfoId;
-
-	@Column(name="customer_info_id")
 	private Long customerInfoId;
-	@Column(name="product_name")
 	private String productName;
-	@Column(name="payment_mode")
 	private String paymentMode;
-	@Column(name="unit_price")
 	private double unitPrice;
-	@Column(name="quantity")
 	private double quantity;
-	@Column(name="profit")
 	private double profit;
 	public Long getOrderInfoId() {
 		return orderInfoId;
@@ -39,7 +14,6 @@ public class OrderInfo implements Serializable{
 	public void setOrderInfoId(Long orderInfoId) {
 		this.orderInfoId = orderInfoId;
 	}
-
 	public Long getCustomerInfoId() {
 		return customerInfoId;
 	}

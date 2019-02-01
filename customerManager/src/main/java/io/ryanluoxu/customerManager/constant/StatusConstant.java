@@ -1,4 +1,4 @@
-package io.ryanluoxu.customerManager;
+package io.ryanluoxu.customerManager.constant;
 
 public class StatusConstant {
 

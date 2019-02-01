@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+
+<meta charset="ISO-8859-1">
+<title>Customer Manager</title>
+
+<!-- load bootstrap and fontawesome via CDN -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
+<!-- load angular and angular route via CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+
+
+</head>
+<body ng-controller="mainController">
+
+	<!-- HEADER AND NAVBAR -->
+	<header>
+		<nav class="navbar navbar-default">
+			<div class="container">
+
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">Customer Manager</a>
+				</div>
+
+				<div class="nav navbar-nav navbar-right">
+					<button ng-click="showCustomerInfo()">Customer Information</button>
+					<button ng-click="showOrderInfo()">Order Information</button>
+				</div>
+
+			</div>
+		</nav>
+	</header>
+
+	<!-- MAIN CONTENT AND INJECTED VIEWS -->
+	<div id="main">
+		<!-- this is where content will be injected -->
+		<div ng-view></div>
+	</div>
+
+	<script src="app.js"></script>
+	<script src="js/controller/main.controller.js"></script>
+	<script src="js/controller/customer.info.controller.js"></script>
+	<script src="js/controller/order.info.controller.js"></script>
+</body>
+</html>

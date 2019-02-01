@@ -7,17 +7,28 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import io.ryanluoxu.customerManager.dao.GenericDao;
 import io.ryanluoxu.customerManager.util.ClassUtil;
 import io.ryanluoxu.customerManager.util.JpaUtil;
 
 public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T, ID> {
-	
+
 	@SuppressWarnings("rawtypes")
 	protected Class targetClass;
-	
+
+	@Autowired
+	private SessionFactory sessionFactory;
+
 	public GenericDaoImpl() {
 		this.targetClass = ClassUtil.getTypeArguments(GenericDaoImpl.class, this.getClass()).get(0);
+	}
+
+	protected final Session getSession(){
+		return sessionFactory.getCurrentSession();
 	}
 
 	@Override

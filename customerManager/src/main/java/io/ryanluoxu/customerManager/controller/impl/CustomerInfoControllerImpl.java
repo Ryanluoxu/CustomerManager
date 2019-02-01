@@ -1,9 +1,12 @@
 package io.ryanluoxu.customerManager.controller.impl;
 
-import org.springframework.beans.BeanUtils;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.ryanluoxu.customerManager.constant.CustomerInfoConstant;
 import io.ryanluoxu.customerManager.controller.CustomerInfoController;
 import io.ryanluoxu.customerManager.entity.CustomerInfo;
 import io.ryanluoxu.customerManager.exception.CustomerInfoException;
@@ -13,11 +16,11 @@ import io.ryanluoxu.customerManager.validator.CustomerInfoValidator;
 import io.ryanluoxu.customerManager.vo.CustomerInfoVO;
 
 @Service
-public class CustomerInfoControllerImpl implements CustomerInfoController {
-	
+public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo, CustomerInfoVO, CustomerInfoInput> implements CustomerInfoController {
+
 	@Autowired
 	private CustomerInfoValidator customerInfoValidator;
-	
+
 	@Autowired
 	private CustomerInfoService customerInfoService;
 
@@ -35,18 +38,26 @@ public class CustomerInfoControllerImpl implements CustomerInfoController {
 
 	@Override
 	public CustomerInfoVO add(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		return convertToCustomerInfoVO(customerInfoService.addCustomerInfo(customerInfoInput));
+		return convertToVO(customerInfoService.add(convertToBean(customerInfoInput)));
 	}
 
 	@Override
 	public CustomerInfoVO delete(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		return convertToCustomerInfoVO(customerInfoService.deleteById(customerInfoInput.getCustomerInfoId()));
+		CustomerInfo customerInfo = customerInfoService.getById(customerInfoInput.getCustomerInfoId());
+		customerInfo.setStatus(CustomerInfoConstant.STATUS_INACTIVE);
+		return convertToVO(customerInfoService.update(customerInfo));
 	}
 
-	private CustomerInfoVO convertToCustomerInfoVO(CustomerInfo customerInfo) {
-		CustomerInfoVO customerInfoVO = new CustomerInfoVO();
-		BeanUtils.copyProperties(customerInfo, customerInfoVO);
-		return customerInfoVO;
+	@Override
+	public List<CustomerInfoVO> findAll() throws CustomerInfoException {
+		List<CustomerInfoVO> customerInfoVOs = new ArrayList<>();
+		List<CustomerInfo> customerInfos = customerInfoService.findActive();
+		for (CustomerInfo customerInfo : customerInfos) {
+			CustomerInfoVO customerInfoVO = convertToVO(customerInfo);
+			customerInfoVOs.add(customerInfoVO);
+		}
+		return customerInfoVOs;
 	}
+
 
 }
