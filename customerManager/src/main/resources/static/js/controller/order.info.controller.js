@@ -27,7 +27,7 @@ app.controller('orderInfoController', function($scope, $http, $rootScope, $locat
 		}
 		$http.post('/orderInfo/add', orderInfoInput).success(function(data, status, headers, config) {
 			$scope.message = "Success";
-			$location.url("/orderInfo");
+			$location.url("/orderInfo"); 
 		}).error(function(data, status, headers, config) {
 			$scope.message = "fail";
 		})

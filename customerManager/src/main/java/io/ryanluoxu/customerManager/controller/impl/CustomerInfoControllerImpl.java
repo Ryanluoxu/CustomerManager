@@ -31,6 +31,12 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 	}
 
 	@Override
+	public void validateInputForEdit(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
+		customerInfoValidator.validateMandatoryFieldsForEdit(customerInfoInput);
+		customerInfoValidator.validateInputValueForEdit(customerInfoInput);
+	}
+	
+	@Override
 	public void validateInputForDelete(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
 		customerInfoValidator.validateMandatoryFieldsForDelete(customerInfoInput);
 		customerInfoValidator.validateInputValueForDelete(customerInfoInput);
@@ -58,6 +64,14 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 		}
 		return customerInfoVOs;
 	}
+
+	@Override
+	public CustomerInfoVO update(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 
 }

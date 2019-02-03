@@ -24,20 +24,57 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 				"address":$scope.customerInfo.address
 		}
 		$http.post('/customerInfo/add', customerInfoInput).success(function(data, status, headers, config) {
-			$scope.message = "Success";
-			$location.url("/customerInfo");
+			if (data.status == 'success') {
+				alert("success");
+				$location.url("/customerInfo");				
+			} else if (data.status == 'fail') {
+				alert(data.errorMsg);
+			}
 		}).error(function(data, status, headers, config) {
 			$scope.message = "fail";
 		})
 	}
-
+	
+	$scope.editCustomerInfo = function(customerInfoVO) {
+		$rootScope.customerInfoVO = customerInfoVO;
+		$location.url("/customerInfo/edit");			
+	}
+	
+	$scope.updateCustomerInfo = function(customerInfo) {
+		var customerInfoInput = {
+				"customerInfoId":$scope.customerInfo.customerInfoId,
+				"function":$scope.customerInfo.function,
+				"companyName":$scope.customerInfo.companyName,
+				"country":$scope.customerInfo.country,
+				"email":$scope.customerInfo.email,
+				"contactMobile":$scope.customerInfo.contactMobile,
+				"contactOffice":$scope.customerInfo.contactOffice,
+				"contactFax":$scope.customerInfo.contactFax,
+				"address":$scope.customerInfo.address
+		}
+		$http.post('/customerInfo/update', customerInfoInput).success(function(data, status, headers, config) {
+			if (data.status == 'success') {
+				alert("success");
+				$location.url("/customerInfo");				
+			} else if (data.status == 'fail') {
+				alert(data.errorMsg);
+			}
+		}).error(function(data, status, headers, config) {
+			$scope.message = "fail";
+		})
+	}
+	
 	$scope.deleteCustomerInfo = function(customerInfoId) {
 		var customerInfoInput = {
 				"customerInfoId":customerInfoId
 		}
 		$http.post('/customerInfo/delete', customerInfoInput).success(function(data, status, headers, config) {
-			$scope.message = "Success";
-			$scope.findAllCustomerInfo();
+			if (data.status == 'success') {
+				alert("success");
+				$location.url("/customerInfo");				
+			} else if (data.status == 'fail') {
+				alert(data.errorMsg);
+			}
 		}).error(function(data, status, headers, config) {
 			$scope.message = "fail";
 		})
@@ -48,4 +85,5 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 	}
 
 	$scope.findAllCustomerInfo();
+	$scope.customerInfo = $rootScope.customerInfoVO;
 });

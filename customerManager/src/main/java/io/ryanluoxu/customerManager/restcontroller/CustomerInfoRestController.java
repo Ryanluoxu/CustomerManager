@@ -37,6 +37,21 @@ public class CustomerInfoRestController {
 		}
 		return response;
 	}
+	
+	@PostMapping("/update")
+	ResponseModel<CustomerInfoVO> update(@RequestBody CustomerInfoInput customerInfoInput){
+		ResponseModel<CustomerInfoVO> response = new ResponseModel<>();
+		try {
+			customerInfoController.validateInputForEdit(customerInfoInput);
+			CustomerInfoVO customerInfoVO = customerInfoController.update(customerInfoInput);
+			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
+			response.setData(customerInfoVO);
+		} catch (CustomerInfoException e) {
+			response.setStatus(StatusConstant.RESPONSE_FAIL);
+			response.setErrorMsg(e.getErrorMsg());
+		}
+		return response;
+	}
 
 	@PostMapping("/delete")
 	ResponseModel<CustomerInfoVO> delete(@RequestBody CustomerInfoInput customerInfoInput){
