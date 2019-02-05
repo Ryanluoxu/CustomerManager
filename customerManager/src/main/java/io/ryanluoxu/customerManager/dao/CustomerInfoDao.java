@@ -2,7 +2,7 @@ package io.ryanluoxu.customerManager.dao;
 
 import java.util.List;
 
-import io.ryanluoxu.customerManager.entity.CustomerInfo;
+import io.ryanluoxu.customerManager.bean.entity.CustomerInfo;
 
 public interface CustomerInfoDao extends GenericDao<CustomerInfo, Long>{
 

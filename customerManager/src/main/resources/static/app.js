@@ -18,12 +18,22 @@ app.config(function($routeProvider) {
 	}).when('/customerInfo/edit', {
 		templateUrl : 'pages/customerInfo/edit.html',
 		controller : 'customerInfoController'
-	}).when('/orderInfo', {
+	})
+	
+	.when('/orderInfo', {
 		templateUrl : 'pages/orderInfo.html',
 		controller : 'orderInfoController'
 	}).when('/orderInfo/add', {
 		templateUrl : 'pages/orderInfo/add.html',
 		controller : 'orderInfoController'
+	})
+	
+	.when('/companyInfo', {
+		templateUrl : 'pages/companyInfo.html',
+		controller : 'companyInfoController'
+	}).when('/companyInfo/add', {
+		templateUrl : 'pages/companyInfo/add.html',
+		controller : 'companyInfoController'
 	})
 
 	.otherwise({

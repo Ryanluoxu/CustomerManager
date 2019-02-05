@@ -6,14 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.ryanluoxu.customerManager.bean.entity.CustomerInfo;
+import io.ryanluoxu.customerManager.bean.input.CustomerInfoInput;
+import io.ryanluoxu.customerManager.bean.vo.CustomerInfoVO;
 import io.ryanluoxu.customerManager.constant.CustomerInfoConstant;
 import io.ryanluoxu.customerManager.controller.CustomerInfoController;
-import io.ryanluoxu.customerManager.entity.CustomerInfo;
 import io.ryanluoxu.customerManager.exception.CustomerInfoException;
-import io.ryanluoxu.customerManager.input.CustomerInfoInput;
 import io.ryanluoxu.customerManager.service.CustomerInfoService;
 import io.ryanluoxu.customerManager.validator.CustomerInfoValidator;
-import io.ryanluoxu.customerManager.vo.CustomerInfoVO;
 
 @Service
 public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo, CustomerInfoVO, CustomerInfoInput> implements CustomerInfoController {

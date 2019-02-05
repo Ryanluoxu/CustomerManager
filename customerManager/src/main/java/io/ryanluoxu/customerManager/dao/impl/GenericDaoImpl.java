@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,6 +22,8 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
 
 	@SuppressWarnings("rawtypes")
 	protected Class targetClass;
+	
+	protected final String QUERY_TYPE_EQUAL = "equal";
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -30,6 +35,23 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
 	protected final Session getSession(){
 		return sessionFactory.getCurrentSession();
 	}
+	
+	@SuppressWarnings("unchecked")
+	protected CriteriaQuery<T> getCriteriaQuery(String queryType, String param, String value) {
+		//**creating CriteriaBuilder**
+		CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(targetClass);
+		Root<T> root = criteriaQuery.from(targetClass);
+		criteriaQuery.select(root);
+
+		//**Adding where clause**
+		if (QUERY_TYPE_EQUAL.equals(queryType)) {
+			criteriaQuery.where(criteriaBuilder.equal(root.get(param), value));			
+		}
+		
+		return criteriaQuery;
+	}
+	
 
 	@Override
 	public T add(T t) {

@@ -2,7 +2,7 @@ package io.ryanluoxu.customerManager.service;
 
 import java.util.List;
 
-import io.ryanluoxu.customerManager.entity.CustomerInfo;
+import io.ryanluoxu.customerManager.bean.entity.CustomerInfo;
 
 public interface CustomerInfoService {
 	CustomerInfo add(CustomerInfo customerInfo);
@@ -10,6 +10,6 @@ public interface CustomerInfoService {
 	CustomerInfo deleteById(Long customerInfoId);
 
 	List<CustomerInfo> findAll();
-	CustomerInfo getById(Long customerInfoId);
 	List<CustomerInfo> findActive();
+	CustomerInfo getById(Long customerInfoId);
 }

@@ -1,4 +1,4 @@
-package io.ryanluoxu.customerManager.entity;
+package io.ryanluoxu.customerManager.bean.entity;
 
 import java.io.Serializable;
 

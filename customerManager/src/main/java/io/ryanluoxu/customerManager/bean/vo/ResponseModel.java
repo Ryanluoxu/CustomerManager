@@ -1,4 +1,4 @@
-package io.ryanluoxu.customerManager.vo;
+package io.ryanluoxu.customerManager.bean.vo;
 
 public class ResponseModel<T> {
 	private String status;

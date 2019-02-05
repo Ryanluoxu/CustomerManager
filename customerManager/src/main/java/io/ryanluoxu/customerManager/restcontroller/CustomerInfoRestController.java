@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.ryanluoxu.customerManager.bean.input.CustomerInfoInput;
+import io.ryanluoxu.customerManager.bean.vo.CustomerInfoVO;
+import io.ryanluoxu.customerManager.bean.vo.ResponseModel;
 import io.ryanluoxu.customerManager.constant.StatusConstant;
 import io.ryanluoxu.customerManager.controller.CustomerInfoController;
 import io.ryanluoxu.customerManager.exception.CustomerInfoException;
-import io.ryanluoxu.customerManager.input.CustomerInfoInput;
-import io.ryanluoxu.customerManager.vo.CustomerInfoVO;
-import io.ryanluoxu.customerManager.vo.ResponseModel;
 
 @RestController
 @RequestMapping("/customerInfo")

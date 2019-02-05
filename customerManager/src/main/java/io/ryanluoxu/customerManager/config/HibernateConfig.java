@@ -23,7 +23,7 @@ public class HibernateConfig {
 	@Autowired
 	protected Environment environment;
 
-	@Value("#{'io.ryanluoxu.customerManager.entity'.split(',')}")
+	@Value("#{'io.ryanluoxu.customerManager.bean.entity'.split(',')}")
 	protected List<String> packageList;
 
 	@Bean

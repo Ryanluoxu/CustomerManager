@@ -1,62 +1,16 @@
-package io.ryanluoxu.customerManager.entity;
+package io.ryanluoxu.customerManager.bean.input;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="customer_info")
-public class CustomerInfo implements Serializable{
-	private static final long serialVersionUID = 1200796892383975865L;
-
-	@Id
-	@Column(name="customer_info_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_info_seq_gen")
-	@SequenceGenerator(name = "customer_info_seq_gen", sequenceName = "customer_info_id_seq", initialValue = 1, allocationSize = 1)
+public class CustomerInfoInput {
 	private Long customerInfoId;
-
-	@Column(name="customer_name")
 	private String customerName;
-	@Column(name="function")
 	private String function;
-	@Column(name="company_name")
 	private String companyName;
-	@Column(name="country")
 	private String country;
-	@Column(name="email")
 	private String email;
-	@Column(name="contact_mobile")
 	private String contactMobile;
-	@Column(name="contact_office")
 	private String contactOffice;
-	@Column(name="contact_fax")
 	private String contactFax;
-	@Column(name="address")
 	private String address;
-	@Column(name="status")
-	private String status;
-	@Column(name="created_date")
-	private Date createdDate;
-
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
 	public Long getCustomerInfoId() {
 		return customerInfoId;
 	}
@@ -117,5 +71,4 @@ public class CustomerInfo implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 }

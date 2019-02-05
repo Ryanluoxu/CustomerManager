@@ -1,6 +1,6 @@
-package io.ryanluoxu.customerManager.input;
+package io.ryanluoxu.customerManager.bean.vo;
 
-public class CustomerInfoInput {
+public class CustomerInfoVO {
 	private Long customerInfoId;
 	private String customerName;
 	private String function;

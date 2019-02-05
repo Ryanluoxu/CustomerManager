@@ -2,9 +2,9 @@ package io.ryanluoxu.customerManager.controller;
 
 import java.util.List;
 
+import io.ryanluoxu.customerManager.bean.input.CustomerInfoInput;
+import io.ryanluoxu.customerManager.bean.vo.CustomerInfoVO;
 import io.ryanluoxu.customerManager.exception.CustomerInfoException;
-import io.ryanluoxu.customerManager.input.CustomerInfoInput;
-import io.ryanluoxu.customerManager.vo.CustomerInfoVO;
 
 public interface CustomerInfoController {
 
