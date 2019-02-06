@@ -12,4 +12,5 @@ public interface CompanyInfoService {
 	List<CompanyInfo> findAll();
 	List<CompanyInfo> findActive();
 	CompanyInfo getById(Long companyInfoId);
+	CompanyInfo getActive(Long companyInfoId);
 }

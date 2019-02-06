@@ -1,4 +1,4 @@
-package io.ryanluoxu.customerManager.config;
+package io.ryanluoxu.customerManager.base.config;
 
 import java.util.List;
 import java.util.Properties;

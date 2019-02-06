@@ -26,8 +26,6 @@ public class ProductInfo implements Serializable{
 	private Long companyInfoId;
 	@Column(name="product_name")
 	private String productName;
-	@Column(name="country")
-	private String country;
 	@Column(name="status")
 	private String status;
 	@Column(name="created_date")
@@ -49,12 +47,6 @@ public class ProductInfo implements Serializable{
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
 	}
 	public String getStatus() {
 		return status;

@@ -1,4 +1,4 @@
-package io.ryanluoxu.customerManager.constant;
+package io.ryanluoxu.customerManager.base.constant;
 
 public class ActionTypeConstant {
 

@@ -1,4 +1,4 @@
-package io.ryanluoxu.customerManager.exception;
+package io.ryanluoxu.customerManager.base.exception;
 
 public class CustomerInfoError {
 

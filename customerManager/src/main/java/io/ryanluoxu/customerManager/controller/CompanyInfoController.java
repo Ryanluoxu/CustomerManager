@@ -2,9 +2,9 @@ package io.ryanluoxu.customerManager.controller;
 
 import java.util.List;
 
+import io.ryanluoxu.customerManager.base.exception.CommonException;
 import io.ryanluoxu.customerManager.bean.input.CompanyInfoInput;
 import io.ryanluoxu.customerManager.bean.vo.CompanyInfoVO;
-import io.ryanluoxu.customerManager.exception.CommonException;
 
 public interface CompanyInfoController {
 

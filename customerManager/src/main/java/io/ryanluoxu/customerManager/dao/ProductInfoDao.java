@@ -8,4 +8,6 @@ public interface ProductInfoDao extends GenericDao<ProductInfo, Long>{
 
 	List<ProductInfo> findActive();
 
+	ProductInfo getActive(Long productInfoId);
+
 }

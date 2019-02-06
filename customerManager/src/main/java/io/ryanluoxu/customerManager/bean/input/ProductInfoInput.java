@@ -7,7 +7,6 @@ public class ProductInfoInput {
 	private Long productInfoId;
 	private Long companyInfoId;
 	private String productName;
-	private String country;
 	private String status;
 	private Date createdDate;
 	public Long getProductInfoId() {
@@ -27,12 +26,6 @@ public class ProductInfoInput {
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
 	}
 	public String getStatus() {
 		return status;

@@ -1,7 +1,7 @@
 package io.ryanluoxu.customerManager.validator;
 
+import io.ryanluoxu.customerManager.base.exception.CustomerInfoException;
 import io.ryanluoxu.customerManager.bean.input.CustomerInfoInput;
-import io.ryanluoxu.customerManager.exception.CustomerInfoException;
 
 public interface CustomerInfoValidator {
 

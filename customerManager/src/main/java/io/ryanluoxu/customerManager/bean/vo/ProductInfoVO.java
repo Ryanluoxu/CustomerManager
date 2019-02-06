@@ -2,12 +2,13 @@ package io.ryanluoxu.customerManager.bean.vo;
 
 import java.util.Date;
 
+import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
+
 public class ProductInfoVO {
 
 	private Long productInfoId;
-	private Long companyInfoId;
+	private CompanyInfo companyInfo;
 	private String productName;
-	private String country;
 	private String status;
 	private Date createdDate;
 	public Long getProductInfoId() {
@@ -16,23 +17,17 @@ public class ProductInfoVO {
 	public void setProductInfoId(Long productInfoId) {
 		this.productInfoId = productInfoId;
 	}
-	public Long getCompanyInfoId() {
-		return companyInfoId;
+	public CompanyInfo getCompanyInfo() {
+		return companyInfo;
 	}
-	public void setCompanyInfoId(Long companyInfoId) {
-		this.companyInfoId = companyInfoId;
+	public void setCompanyInfo(CompanyInfo companyInfo) {
+		this.companyInfo = companyInfo;
 	}
 	public String getProductName() {
 		return productName;
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
 	}
 	public String getStatus() {
 		return status;

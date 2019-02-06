@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
+import io.ryanluoxu.customerManager.base.exception.CommonError;
+import io.ryanluoxu.customerManager.base.exception.CommonException;
 import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
 import io.ryanluoxu.customerManager.bean.input.CompanyInfoInput;
-import io.ryanluoxu.customerManager.constant.ActionTypeConstant;
-import io.ryanluoxu.customerManager.exception.CommonError;
-import io.ryanluoxu.customerManager.exception.CommonException;
 import io.ryanluoxu.customerManager.service.CompanyInfoService;
 import io.ryanluoxu.customerManager.validator.CompanyInfoValidator;
 
@@ -25,6 +25,7 @@ public class CompanyInfoValidatorImpl implements CompanyInfoValidator {
 			
 		} else if (ActionTypeConstant.ACTION_TYPE_UPDATE.equals(actionType)) {
 			checkMissingCompanyInfoId(companyInfoInput);
+			checkMissingCompanyName(companyInfoInput);
 			
 		} else if (ActionTypeConstant.ACTION_TYPE_FIND.equals(actionType)) {
 			
@@ -41,11 +42,12 @@ public class CompanyInfoValidatorImpl implements CompanyInfoValidator {
 		if (ActionTypeConstant.ACTION_TYPE_ADD.equals(actionType)) {
 			
 		} else if (ActionTypeConstant.ACTION_TYPE_UPDATE.equals(actionType)) {
+			validateCompanyInfoId(companyInfoInput);
 			
 		} else if (ActionTypeConstant.ACTION_TYPE_FIND.equals(actionType)) {
 			
 		} else if (ActionTypeConstant.ACTION_TYPE_DELETE.equals(actionType)) {
-			checkCompanyInfoId(companyInfoInput);
+			validateCompanyInfoId(companyInfoInput);
 			
 		} else {
 			throw new CommonException(CommonError.INVALID_CUSTOMER_INFO_ID);
@@ -67,9 +69,8 @@ public class CompanyInfoValidatorImpl implements CompanyInfoValidator {
 	/**
 	 * validate fields
 	 */
-	private void checkCompanyInfoId(CompanyInfoInput companyInfoInput) throws CommonException {
-		// TODO check status
-		CompanyInfo companyInfo = companyInfoService.getById(companyInfoInput.getCompanyInfoId());
+	private void validateCompanyInfoId(CompanyInfoInput companyInfoInput) throws CommonException {
+		CompanyInfo companyInfo = companyInfoService.getActive(companyInfoInput.getCompanyInfoId());
 		if (companyInfo == null) {
 			throw new CommonException(CommonError.INVALID_PRODUCT_INFO_ID);
 		}

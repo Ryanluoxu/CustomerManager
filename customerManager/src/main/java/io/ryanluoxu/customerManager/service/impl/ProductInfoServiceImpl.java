@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.ryanluoxu.customerManager.base.constant.ProductInfoConstant;
 import io.ryanluoxu.customerManager.bean.entity.ProductInfo;
-import io.ryanluoxu.customerManager.constant.ProductInfoConstant;
 import io.ryanluoxu.customerManager.dao.ProductInfoDao;
 import io.ryanluoxu.customerManager.service.ProductInfoService;
 
@@ -49,6 +49,11 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	@Override
 	public List<ProductInfo> findActive() {
 		return productInfoDao.findActive();
+	}
+
+	@Override
+	public ProductInfo getActive(Long productInfoId) {
+		return productInfoDao.getActive(productInfoId);
 	}
 
 }

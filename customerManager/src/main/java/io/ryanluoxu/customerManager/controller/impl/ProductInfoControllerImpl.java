@@ -6,14 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
+import io.ryanluoxu.customerManager.base.constant.StatusConstant;
+import io.ryanluoxu.customerManager.base.exception.CommonError;
+import io.ryanluoxu.customerManager.base.exception.CommonException;
+import io.ryanluoxu.customerManager.base.exception.ProductInfoException;
 import io.ryanluoxu.customerManager.bean.entity.ProductInfo;
 import io.ryanluoxu.customerManager.bean.input.ProductInfoInput;
 import io.ryanluoxu.customerManager.bean.vo.ProductInfoVO;
-import io.ryanluoxu.customerManager.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.controller.ProductInfoController;
-import io.ryanluoxu.customerManager.exception.CommonError;
-import io.ryanluoxu.customerManager.exception.CommonException;
-import io.ryanluoxu.customerManager.exception.ProductInfoException;
 import io.ryanluoxu.customerManager.service.ProductInfoService;
 import io.ryanluoxu.customerManager.validator.ProductInfoValidator;
 
@@ -49,6 +50,13 @@ public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, P
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public ProductInfoVO delete(ProductInfoInput productInfoInput) {
+		ProductInfo productInfo = productInfoService.getById(productInfoInput.getProductInfoId());
+		productInfo.setStatus(StatusConstant.INACTIVE);
+		return convertToVO(productInfoService.update(productInfo));
+	}
 
 	@Override
 	public void validateInput(ProductInfoInput productInfoInput, String actionType) throws CommonException {
@@ -66,8 +74,6 @@ public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, P
 		}
 		
 	}
-
-
 
 
 }

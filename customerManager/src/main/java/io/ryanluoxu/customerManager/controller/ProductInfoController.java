@@ -2,10 +2,10 @@ package io.ryanluoxu.customerManager.controller;
 
 import java.util.List;
 
+import io.ryanluoxu.customerManager.base.exception.CommonException;
+import io.ryanluoxu.customerManager.base.exception.ProductInfoException;
 import io.ryanluoxu.customerManager.bean.input.ProductInfoInput;
 import io.ryanluoxu.customerManager.bean.vo.ProductInfoVO;
-import io.ryanluoxu.customerManager.exception.CommonException;
-import io.ryanluoxu.customerManager.exception.ProductInfoException;
 
 public interface ProductInfoController {
 
@@ -14,4 +14,6 @@ public interface ProductInfoController {
 	ProductInfoVO add(ProductInfoInput productInfoInput) throws ProductInfoException;
 	ProductInfoVO update(ProductInfoInput productInfoInput) throws ProductInfoException;
 	List<ProductInfoVO> findAll() throws ProductInfoException;
+
+	ProductInfoVO delete(ProductInfoInput productInfoInput);
 }

@@ -1,4 +1,4 @@
-package io.ryanluoxu.customerManager.exception;
+package io.ryanluoxu.customerManager.base.exception;
 
 public class CommonError {
 
@@ -21,6 +21,8 @@ public class CommonError {
 	public static String INVALID_COMPANY_INFO_ID = "Error : invalid company info id.";
 	
 	// PRODUCT_INFO
+	public static String MISSING_PRODUCT_INFO_ID = "Error : missing product info id.";
+	public static String MISSING_PRODUCT_NAME = "Error : missing product name.";
 	public static String INVALID_PRODUCT_INFO_ID = "Error : invalid product info id.";
 	
 	

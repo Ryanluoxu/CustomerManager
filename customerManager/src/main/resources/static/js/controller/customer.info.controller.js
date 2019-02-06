@@ -36,7 +36,7 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 	}
 	
 	$scope.editCustomerInfo = function(customerInfoVO) {
-		$rootScope.customerInfoVO = customerInfoVO;
+		$rootScope.customerInfo = customerInfoVO;
 		$location.url("/customerInfo/edit");			
 	}
 	
@@ -85,5 +85,4 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 	}
 
 	$scope.findAllCustomerInfo();
-	$scope.customerInfo = $rootScope.customerInfoVO;
 });

@@ -1,4 +1,4 @@
-package io.ryanluoxu.customerManager.util;
+package io.ryanluoxu.customerManager.base.util;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;

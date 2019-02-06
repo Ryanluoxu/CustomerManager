@@ -1,4 +1,4 @@
-package io.ryanluoxu.customerManager.util;
+package io.ryanluoxu.customerManager.base.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

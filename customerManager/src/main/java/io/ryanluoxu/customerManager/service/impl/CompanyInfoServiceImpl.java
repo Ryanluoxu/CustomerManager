@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.ryanluoxu.customerManager.base.constant.CompanyInfoConstant;
 import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
-import io.ryanluoxu.customerManager.constant.CompanyInfoConstant;
 import io.ryanluoxu.customerManager.dao.CompanyInfoDao;
 import io.ryanluoxu.customerManager.service.CompanyInfoService;
 
@@ -49,6 +49,11 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 	@Override
 	public List<CompanyInfo> findActive() {
 		return companyInfoDao.findActive();
+	}
+
+	@Override
+	public CompanyInfo getActive(Long companyInfoId) {
+		return companyInfoDao.getActive(companyInfoId);
 	}
 
 }

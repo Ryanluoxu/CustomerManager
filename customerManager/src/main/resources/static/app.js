@@ -34,6 +34,20 @@ app.config(function($routeProvider) {
 	}).when('/companyInfo/add', {
 		templateUrl : 'pages/companyInfo/add.html',
 		controller : 'companyInfoController'
+	}).when('/companyInfo/edit', {
+		templateUrl : 'pages/companyInfo/edit.html',
+		controller : 'companyInfoController'
+	})
+	
+	.when('/productInfo', {
+		templateUrl : 'pages/productInfo.html',
+		controller : 'productInfoController'
+	}).when('/productInfo/add', {
+		templateUrl : 'pages/productInfo/add.html',
+		controller : 'productInfoController'
+	}).when('/productInfo/edit', {
+		templateUrl : 'pages/productInfo/edit.html',
+		controller : 'productInfoController'
 	})
 
 	.otherwise({

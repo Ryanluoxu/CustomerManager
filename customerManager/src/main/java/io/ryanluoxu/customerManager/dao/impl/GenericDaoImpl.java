@@ -13,10 +13,12 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
+import io.ryanluoxu.customerManager.base.util.ClassUtil;
+import io.ryanluoxu.customerManager.base.util.JpaUtil;
+import io.ryanluoxu.customerManager.bean.input.QueryInput;
 import io.ryanluoxu.customerManager.dao.GenericDao;
-import io.ryanluoxu.customerManager.util.ClassUtil;
-import io.ryanluoxu.customerManager.util.JpaUtil;
 
 public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T, ID> {
 
@@ -47,6 +49,26 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
 		//**Adding where clause**
 		if (QUERY_TYPE_EQUAL.equals(queryType)) {
 			criteriaQuery.where(criteriaBuilder.equal(root.get(param), value));			
+		}
+		
+		return criteriaQuery;
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	protected CriteriaQuery<T> getCriteriaQuery(List<QueryInput> queryInputs) {
+		//**creating CriteriaBuilder**
+		CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(targetClass);
+		Root<T> root = criteriaQuery.from(targetClass);
+		criteriaQuery.select(root);
+
+		//**Adding where clause**
+		if (!CollectionUtils.isEmpty(queryInputs)) {
+			for (QueryInput queryInput : queryInputs) {
+				if (QUERY_TYPE_EQUAL.equals(queryInput.getQueryType())) {
+					criteriaQuery.where(criteriaBuilder.equal(root.get(queryInput.getParam()), queryInput.getValue()));			
+				}				
+			}
 		}
 		
 		return criteriaQuery;

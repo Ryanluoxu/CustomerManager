@@ -6,8 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import io.ryanluoxu.customerManager.base.constant.CustomerInfoConstant;
 import io.ryanluoxu.customerManager.bean.entity.CustomerInfo;
-import io.ryanluoxu.customerManager.constant.CustomerInfoConstant;
 import io.ryanluoxu.customerManager.dao.CustomerInfoDao;
 
 @Repository

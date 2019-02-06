@@ -8,4 +8,6 @@ public interface CompanyInfoDao extends GenericDao<CompanyInfo, Long>{
 
 	List<CompanyInfo> findActive();
 
+	CompanyInfo getActive(Long companyInfoId);
+
 }

@@ -2,8 +2,8 @@ package io.ryanluoxu.customerManager.controller.impl;
 
 import org.springframework.beans.BeanUtils;
 
+import io.ryanluoxu.customerManager.base.util.ClassUtil;
 import io.ryanluoxu.customerManager.controller.BaseController;
-import io.ryanluoxu.customerManager.util.ClassUtil;
 
 public abstract class BaseControllerImpl<T, TVO, TInput> implements BaseController {
 
