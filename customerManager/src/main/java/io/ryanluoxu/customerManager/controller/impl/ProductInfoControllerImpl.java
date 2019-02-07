@@ -41,8 +41,7 @@ public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, P
 
 	@Override
 	public ProductInfoVO add(ProductInfoInput productInfoInput) throws ProductInfoException {
-		// TODO Auto-generated method stub
-		return null;
+		return convertToVO(productInfoService.add(convertToBean(productInfoInput)));
 	}
 
 	@Override

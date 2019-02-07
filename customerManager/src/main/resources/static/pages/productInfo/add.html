@@ -13,9 +13,8 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Company</label>
 				<div class="col-sm-8">
-					<select class="form-control" ng-model="productInfo.companyInfo">
-						<option ng-repeat="option in companyInfoVOs" value="{{option}}">{{option.companyName}}</option>
-					</select>
+					<select class="form-control" ng-model="productInfo.companyInfo"
+						ng-options="option.companyName for option in companyInfoVOs"></select>
 				</div>
 			</div>
 			<button ng-click="preview()" class="btn btn-default">Next</button>

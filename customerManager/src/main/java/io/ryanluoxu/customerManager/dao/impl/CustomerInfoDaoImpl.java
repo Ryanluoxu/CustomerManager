@@ -2,11 +2,11 @@ package io.ryanluoxu.customerManager.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.criteria.CriteriaQuery;
+
 import org.springframework.stereotype.Repository;
 
-import io.ryanluoxu.customerManager.base.constant.CustomerInfoConstant;
+import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.bean.entity.CustomerInfo;
 import io.ryanluoxu.customerManager.dao.CustomerInfoDao;
 
@@ -15,12 +15,10 @@ public class CustomerInfoDaoImpl extends GenericDaoImpl<CustomerInfo, Long> impl
 
 	private static String STATUS = "status";
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<CustomerInfo> findActive() {
-		Criteria criteria = getSession().createCriteria(CustomerInfo.class);
-		criteria.add(Restrictions.eq(STATUS, CustomerInfoConstant.STATUS_ACTIVE));
-		return criteria.list();
+		CriteriaQuery<CustomerInfo> criteriaQuery = getCriteriaQuery(QUERY_TYPE_EQUAL, STATUS, StatusConstant.ACTIVE);
+		return getSession().createQuery(criteriaQuery).getResultList();
 	}
 
 }
