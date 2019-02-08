@@ -17,6 +17,7 @@ public class ProductInfoDaoImpl extends GenericDaoImpl<ProductInfo, Long> implem
 
 	private static String STATUS = "status";
 	private static String PRODUCT_INFO_ID = "productInfoId";
+	private static String COMPANY_INFO_ID = "companyInfoId";
 
 	@Override
 	public List<ProductInfo> findActive() {
@@ -31,6 +32,12 @@ public class ProductInfoDaoImpl extends GenericDaoImpl<ProductInfo, Long> implem
 		queryInputs.add(new QueryInput(QUERY_TYPE_EQUAL, PRODUCT_INFO_ID, String.valueOf(productInfoId)));
 		CriteriaQuery<ProductInfo> criteriaQuery = getCriteriaQuery(queryInputs);
 		return getSession().createQuery(criteriaQuery).getSingleResult();
+	}
+
+	@Override
+	public List<ProductInfo> findByCompanyInfoId(Long companyInfoId) {
+		CriteriaQuery<ProductInfo> criteriaQuery = getCriteriaQuery(QUERY_TYPE_EQUAL, COMPANY_INFO_ID, String.valueOf(companyInfoId));
+		return getSession().createQuery(criteriaQuery).getResultList();
 	}
 
 }

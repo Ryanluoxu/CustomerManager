@@ -1,13 +1,14 @@
 <div class="jumbotron text-center">
 	<h2>Edit Customer</h2>
 	<br>
-	<!-- TABLE -->
-	<div class="container">
+
+	<!-- edit TABLE -->
+	<div class="container" ng-show="!isPreview">
 		<form>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Customer Name</label>
 				<div class="col-sm-8">
-				{{customerInfo.customerName}}
+				<input type="text" class="form-control" ng-model="customerInfo.customerName">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -58,10 +59,52 @@
 				<input type="text" class="form-control" ng-model="customerInfo.address">
 				</div>
 			</div>
-			<button ng-click="updateCustomerInfo(customerInfo)" class="btn btn-default">Update</button>
-			<button ng-click="deleteCustomerInfo(customerInfoVO.customerInfoId)" class="btn btn-default">Delete</button>
+			<button ng-click="preview()" class="btn btn-default">Update</button>
+			<button ng-click="deleteCustomerInfo(customerInfo.customerInfoId)" class="btn btn-default">Delete</button>
 		</form>
 	</div>
 
+	<!-- preview TABLE -->
+	<div class="container" ng-show="isPreview">
+		<form>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Customer Name</label>
+				<div class="col-sm-8">{{customerInfo.customerName}}</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Company Name</label>
+				<div class="col-sm-8">{{customerInfo.companyName}}</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Country</label>
+				<div class="col-sm-8">{{customerInfo.country}}</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Function</label>
+				<div class="col-sm-8">{{customerInfo.function}}</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Email</label>
+				<div class="col-sm-8">{{customerInfo.email}}</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Mobile Number</label>
+				<div class="col-sm-8">{{customerInfo.contactMobile}}</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Office Number</label>
+				<div class="col-sm-8">{{customerInfo.contactOffice}}</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Fax Number</label>
+				<div class="col-sm-8">{{customerInfo.contactFax}}</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Address</label>
+				<div class="col-sm-8">{{customerInfo.address}}</div>
+			</div>
+			<button ng-click="updateCustomerInfo(customerInfo)" class="btn btn-default">Submit</button>
+		</form>
+	</div>
 
 </div>

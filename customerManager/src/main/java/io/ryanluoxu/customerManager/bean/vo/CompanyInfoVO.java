@@ -39,6 +39,10 @@ public class CompanyInfoVO{
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "CompanyInfoVO [companyInfoId=" + companyInfoId + ", companyName=" + companyName + ", country=" + country
+				+ "]";
+	}
+
 }

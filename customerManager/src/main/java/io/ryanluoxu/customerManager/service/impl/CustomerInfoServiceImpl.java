@@ -51,4 +51,9 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 		return customerInfoDao.findActive();
 	}
 
+	@Override
+	public CustomerInfo getActive(Long customerInfoId) {
+		return customerInfoDao.getActive(customerInfoId);
+	}
+
 }

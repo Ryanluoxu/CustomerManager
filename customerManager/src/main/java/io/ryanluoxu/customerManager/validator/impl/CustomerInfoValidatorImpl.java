@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
+import io.ryanluoxu.customerManager.base.exception.CommonError;
+import io.ryanluoxu.customerManager.base.exception.CommonException;
 import io.ryanluoxu.customerManager.base.exception.CustomerInfoError;
 import io.ryanluoxu.customerManager.base.exception.CustomerInfoException;
 import io.ryanluoxu.customerManager.bean.entity.CustomerInfo;
@@ -13,41 +16,45 @@ import io.ryanluoxu.customerManager.validator.CustomerInfoValidator;
 
 @Service
 public class CustomerInfoValidatorImpl implements CustomerInfoValidator {
-	
+
 	@Autowired
 	private CustomerInfoService customerInfoService;
 
 	@Override
-	public void validateMandatoryFieldsForAdd(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		checkMissingCustomerName(customerInfoInput);
+	public void validateMandatoryFields(CustomerInfoInput customerInfoInput, String actionType) throws CommonException {
+		if (ActionTypeConstant.ACTION_TYPE_ADD.equals(actionType)) {
+			checkMissingCustomerName(customerInfoInput);
+
+		} else if (ActionTypeConstant.ACTION_TYPE_UPDATE.equals(actionType)) {
+			checkMissingCustomerInfoId(customerInfoInput);
+			checkMissingCustomerName(customerInfoInput);
+
+		} else if (ActionTypeConstant.ACTION_TYPE_FIND.equals(actionType)) {
+
+		} else if (ActionTypeConstant.ACTION_TYPE_DELETE.equals(actionType)) {
+			checkMissingCustomerInfoId(customerInfoInput);
+
+		} else {
+			throw new CommonException(CommonError.INVALID_ACTION_TYPE);
+		}
+	}
+	@Override
+	public void validateInputValue(CustomerInfoInput customerInfoInput, String actionType) throws CommonException {
+		if (ActionTypeConstant.ACTION_TYPE_ADD.equals(actionType)) {
+
+		} else if (ActionTypeConstant.ACTION_TYPE_UPDATE.equals(actionType)) {
+			validateCustomerInfoId(customerInfoInput);
+
+		} else if (ActionTypeConstant.ACTION_TYPE_FIND.equals(actionType)) {
+
+		} else if (ActionTypeConstant.ACTION_TYPE_DELETE.equals(actionType)) {
+			validateCustomerInfoId(customerInfoInput);
+
+		} else {
+			throw new CommonException(CommonError.INVALID_PRODUCT_INFO_ID);
+		}
 	}
 
-	@Override
-	public void validateInputValueForAdd(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void validateMandatoryFieldsForDelete(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		checkMissingCustomerInfoId(customerInfoInput);
-	}
-
-	@Override
-	public void validateInputValueForDelete(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		checkCustomerInfoId(customerInfoInput);
-	}
-
-	@Override
-	public void validateMandatoryFieldsForEdit(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		checkMissingCustomerInfoId(customerInfoInput);
-	}
-
-	@Override
-	public void validateInputValueForEdit(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	/**
 	 * check missing fields
 	 */
@@ -57,20 +64,20 @@ public class CustomerInfoValidatorImpl implements CustomerInfoValidator {
 		}
 	}
 	private void checkMissingCustomerInfoId(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		if (customerInfoInput.getCustomerName() == null) {
+		if (customerInfoInput.getCustomerInfoId() == null) {
 			throw new CustomerInfoException(CustomerInfoError.MISSING_CUSTOMER_INFO_ID);
 		}
 	}
-	
+
 	/**
 	 * validate fields
 	 */
-	private void checkCustomerInfoId(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		// TODO check status
-		CustomerInfo customerInfo = customerInfoService.getById(customerInfoInput.getCustomerInfoId());
+	private void validateCustomerInfoId(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
+		CustomerInfo customerInfo = customerInfoService.getActive(customerInfoInput.getCustomerInfoId());
 		if (customerInfo == null) {
 			throw new CustomerInfoException(CustomerInfoError.INVALID_CUSTOMER_INFO_ID);
 		}
 	}
+
 
 }

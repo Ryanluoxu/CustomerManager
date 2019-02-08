@@ -3,11 +3,18 @@ package io.ryanluoxu.customerManager.bean.input;
 public class OrderInfoInp {
 	private Long orderInfoId;
 	private Long customerInfoId;
-	private String productName;
+	private Long productInfoId;
 	private String paymentMode;
 	private double unitPrice;
 	private double quantity;
 	private double profit;
+	
+	public Long getProductInfoId() {
+		return productInfoId;
+	}
+	public void setProductInfoId(Long productInfoId) {
+		this.productInfoId = productInfoId;
+	}
 	public Long getOrderInfoId() {
 		return orderInfoId;
 	}
@@ -19,12 +26,6 @@ public class OrderInfoInp {
 	}
 	public void setCustomerInfoId(Long customerInfoId) {
 		this.customerInfoId = customerInfoId;
-	}
-	public String getProductName() {
-		return productName;
-	}
-	public void setProductName(String productName) {
-		this.productName = productName;
 	}
 	public String getPaymentMode() {
 		return paymentMode;

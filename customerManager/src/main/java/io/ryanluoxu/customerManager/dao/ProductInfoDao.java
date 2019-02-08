@@ -10,4 +10,6 @@ public interface ProductInfoDao extends GenericDao<ProductInfo, Long>{
 
 	ProductInfo getActive(Long productInfoId);
 
+	List<ProductInfo> findByCompanyInfoId(Long companyInfoId);
+
 }

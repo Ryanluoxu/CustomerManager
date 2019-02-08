@@ -12,4 +12,5 @@ public interface CustomerInfoService {
 	List<CustomerInfo> findAll();
 	List<CustomerInfo> findActive();
 	CustomerInfo getById(Long customerInfoId);
+	CustomerInfo getActive(Long customerInfoId);
 }

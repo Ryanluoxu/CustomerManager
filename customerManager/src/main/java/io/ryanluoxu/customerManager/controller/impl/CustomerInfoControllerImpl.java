@@ -6,8 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.base.constant.CustomerInfoConstant;
-import io.ryanluoxu.customerManager.base.exception.CustomerInfoException;
+import io.ryanluoxu.customerManager.base.exception.CommonException;
 import io.ryanluoxu.customerManager.bean.entity.CustomerInfo;
 import io.ryanluoxu.customerManager.bean.input.CustomerInfoInput;
 import io.ryanluoxu.customerManager.bean.vo.CustomerInfoVO;
@@ -25,37 +26,40 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 	private CustomerInfoService customerInfoService;
 
 	@Override
-	public void validateInputForAdd(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		customerInfoValidator.validateMandatoryFieldsForAdd(customerInfoInput);
-		customerInfoValidator.validateInputValueForAdd(customerInfoInput);
+	public CustomerInfoVO add(CustomerInfoInput customerInfoInput) throws CommonException {
+		CustomerInfoVO customerInfoVO = convertToVO(customerInfoService.add(convertToBean(customerInfoInput)));
+		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, customerInfoVO.toString());
+		return customerInfoVO;
 	}
 
 	@Override
-	public void validateInputForEdit(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		customerInfoValidator.validateMandatoryFieldsForEdit(customerInfoInput);
-		customerInfoValidator.validateInputValueForEdit(customerInfoInput);
-	}
-	
-	@Override
-	public void validateInputForDelete(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		customerInfoValidator.validateMandatoryFieldsForDelete(customerInfoInput);
-		customerInfoValidator.validateInputValueForDelete(customerInfoInput);
-	}
-
-	@Override
-	public CustomerInfoVO add(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		return convertToVO(customerInfoService.add(convertToBean(customerInfoInput)));
-	}
-
-	@Override
-	public CustomerInfoVO delete(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
+	public CustomerInfoVO delete(CustomerInfoInput customerInfoInput) {
 		CustomerInfo customerInfo = customerInfoService.getById(customerInfoInput.getCustomerInfoId());
 		customerInfo.setStatus(CustomerInfoConstant.STATUS_INACTIVE);
-		return convertToVO(customerInfoService.update(customerInfo));
+		CustomerInfoVO customerInfoVO = convertToVO(customerInfoService.update(customerInfo));
+		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_DELETE, customerInfoVO.toString());
+		return customerInfoVO;
 	}
 
 	@Override
-	public List<CustomerInfoVO> findAll() throws CustomerInfoException {
+	public CustomerInfoVO update(CustomerInfoInput customerInfoInput) throws CommonException {
+		CustomerInfo customerInfo = customerInfoService.getById(customerInfoInput.getCustomerInfoId());
+		customerInfo.setAddress(customerInfoInput.getAddress());
+		customerInfo.setCompanyName(customerInfoInput.getCompanyName());
+		customerInfo.setContactFax(customerInfoInput.getContactFax());
+		customerInfo.setContactMobile(customerInfoInput.getContactMobile());
+		customerInfo.setContactOffice(customerInfoInput.getContactOffice());
+		customerInfo.setCountry(customerInfoInput.getCountry());
+		customerInfo.setCustomerName(customerInfoInput.getCustomerName());
+		customerInfo.setEmail(customerInfoInput.getEmail());
+		customerInfo.setFunction(customerInfoInput.getFunction());
+		CustomerInfoVO customerInfoVO = convertToVO(customerInfoService.update(customerInfo));
+		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_UPDATE, customerInfoVO.toString());
+		return customerInfoVO;
+	}
+
+	@Override
+	public List<CustomerInfoVO> findAll() throws CommonException {
 		List<CustomerInfoVO> customerInfoVOs = new ArrayList<>();
 		List<CustomerInfo> customerInfos = customerInfoService.findActive();
 		for (CustomerInfo customerInfo : customerInfos) {
@@ -66,12 +70,10 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 	}
 
 	@Override
-	public CustomerInfoVO update(CustomerInfoInput customerInfoInput) throws CustomerInfoException {
-		// TODO Auto-generated method stub
-		return null;
+	public void validate(CustomerInfoInput input, String actionType) throws CommonException {
+		customerInfoValidator.validateMandatoryFields(input, actionType);
+		customerInfoValidator.validateInputValue(input, actionType);
 	}
-
-
 
 
 }

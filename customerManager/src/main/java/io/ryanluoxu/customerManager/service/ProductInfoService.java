@@ -13,4 +13,5 @@ public interface ProductInfoService {
 	List<ProductInfo> findActive();
 	ProductInfo getById(Long productInfoId);
 	ProductInfo getActive(Long productInfoId);
+	List<ProductInfo> findByCompanyInfoId(Long companyInfoId);
 }

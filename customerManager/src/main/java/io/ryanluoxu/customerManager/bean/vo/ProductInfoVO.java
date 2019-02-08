@@ -2,12 +2,11 @@ package io.ryanluoxu.customerManager.bean.vo;
 
 import java.util.Date;
 
-import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
-
 public class ProductInfoVO {
 
 	private Long productInfoId;
-	private CompanyInfo companyInfo;
+	private Long companyInfoId;
+	private String companyName;
 	private String productName;
 	private String status;
 	private Date createdDate;
@@ -17,11 +16,17 @@ public class ProductInfoVO {
 	public void setProductInfoId(Long productInfoId) {
 		this.productInfoId = productInfoId;
 	}
-	public CompanyInfo getCompanyInfo() {
-		return companyInfo;
+	public Long getCompanyInfoId() {
+		return companyInfoId;
 	}
-	public void setCompanyInfo(CompanyInfo companyInfo) {
-		this.companyInfo = companyInfo;
+	public void setCompanyInfoId(Long companyInfoId) {
+		this.companyInfoId = companyInfoId;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	public String getProductName() {
 		return productName;
@@ -41,5 +46,10 @@ public class ProductInfoVO {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-	
+	@Override
+	public String toString() {
+		return "ProductInfoVO [productInfoId=" + productInfoId + ", companyInfoId=" + companyInfoId + ", companyName="
+				+ companyName + ", productName=" + productName + "]";
+	}
+
 }

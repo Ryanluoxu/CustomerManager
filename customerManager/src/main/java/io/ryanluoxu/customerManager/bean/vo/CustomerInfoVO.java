@@ -71,4 +71,12 @@ public class CustomerInfoVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	@Override
+	public String toString() {
+		return "CustomerInfoVO [customerInfoId=" + customerInfoId + ", customerName=" + customerName + ", function="
+				+ function + ", companyName=" + companyName + ", country=" + country + ", email=" + email
+				+ ", contactMobile=" + contactMobile + ", contactOffice=" + contactOffice + ", contactFax=" + contactFax
+				+ ", address=" + address + "]";
+	}
+
 }

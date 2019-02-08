@@ -28,7 +28,7 @@ public class ProductInfoRestController {
 	ResponseModel<ProductInfoVO> add(@RequestBody ProductInfoInput productInfoInput){
 		ResponseModel<ProductInfoVO> response = new ResponseModel<>();
 		try {
-			productInfoController.validateInput(productInfoInput, ActionTypeConstant.ACTION_TYPE_ADD);
+			productInfoController.validate(productInfoInput, ActionTypeConstant.ACTION_TYPE_ADD);
 			ProductInfoVO productInfoVO = productInfoController.add(productInfoInput);
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
 			response.setData(productInfoVO);
@@ -43,7 +43,7 @@ public class ProductInfoRestController {
 	ResponseModel<ProductInfoVO> update(@RequestBody ProductInfoInput productInfoInput){
 		ResponseModel<ProductInfoVO> response = new ResponseModel<>();
 		try {
-			productInfoController.validateInput(productInfoInput, ActionTypeConstant.ACTION_TYPE_UPDATE);
+			productInfoController.validate(productInfoInput, ActionTypeConstant.ACTION_TYPE_UPDATE);
 			ProductInfoVO productInfoVO = productInfoController.update(productInfoInput);
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
 			response.setData(productInfoVO);
@@ -58,7 +58,7 @@ public class ProductInfoRestController {
 	ResponseModel<ProductInfoVO> delete(@RequestBody ProductInfoInput productInfoInput){
 		ResponseModel<ProductInfoVO> response = new ResponseModel<>();
 		try {
-			productInfoController.validateInput(productInfoInput, ActionTypeConstant.ACTION_TYPE_DELETE);
+			productInfoController.validate(productInfoInput, ActionTypeConstant.ACTION_TYPE_DELETE);
 			ProductInfoVO productInfoVO = productInfoController.delete(productInfoInput);
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
 			response.setData(productInfoVO);

@@ -23,8 +23,8 @@ public class OrderInfo implements Serializable{
 
 	@Column(name="customer_info_id")
 	private Long customerInfoId;
-	@Column(name="product_name")
-	private String productName;
+	@Column(name="product_info_id")
+	private Long productInfoId;
 	@Column(name="payment_mode")
 	private String paymentMode;
 	@Column(name="unit_price")
@@ -33,6 +33,13 @@ public class OrderInfo implements Serializable{
 	private double quantity;
 	@Column(name="profit")
 	private double profit;
+	
+	public Long getProductInfoId() {
+		return productInfoId;
+	}
+	public void setProductInfoId(Long productInfoId) {
+		this.productInfoId = productInfoId;
+	}
 	public Long getOrderInfoId() {
 		return orderInfoId;
 	}
@@ -45,12 +52,6 @@ public class OrderInfo implements Serializable{
 	}
 	public void setCustomerInfoId(Long customerInfoId) {
 		this.customerInfoId = customerInfoId;
-	}
-	public String getProductName() {
-		return productName;
-	}
-	public void setProductName(String productName) {
-		this.productName = productName;
 	}
 	public String getPaymentMode() {
 		return paymentMode;

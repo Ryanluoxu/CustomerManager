@@ -24,7 +24,7 @@
 					<tr ng-repeat="productInfoVO in productInfoVOs | filter : searchText">
 						<td scope="row">{{productInfoVO.productInfoId}}</td>
                         <td>{{productInfoVO.productName}}</td>
-                        <td>{{productInfoVO.companyInfo.companyName}}</td>
+                        <td>{{productInfoVO.companyName}}</td>
                         <td><button class="btn btn-primary" ng-click="editProductInfo(productInfoVO)">Edit</button></td>
 					</tr>
 				</tbody>

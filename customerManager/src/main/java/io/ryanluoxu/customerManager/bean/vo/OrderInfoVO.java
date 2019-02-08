@@ -3,11 +3,26 @@ package io.ryanluoxu.customerManager.bean.vo;
 public class OrderInfoVO {
 	private Long orderInfoId;
 	private Long customerInfoId;
+	private String customerName;
+	private Long productInfoId;
 	private String productName;
 	private String paymentMode;
 	private double unitPrice;
 	private double quantity;
 	private double profit;
+	
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public Long getProductInfoId() {
+		return productInfoId;
+	}
+	public void setProductInfoId(Long productInfoId) {
+		this.productInfoId = productInfoId;
+	}
 	public Long getOrderInfoId() {
 		return orderInfoId;
 	}
@@ -50,4 +65,11 @@ public class OrderInfoVO {
 	public void setProfit(double profit) {
 		this.profit = profit;
 	}
+	@Override
+	public String toString() {
+		return "OrderInfoVO [orderInfoId=" + orderInfoId + ", customerInfoId=" + customerInfoId + ", productName="
+				+ productName + ", paymentMode=" + paymentMode + ", unitPrice=" + unitPrice + ", quantity=" + quantity
+				+ ", profit=" + profit + "]";
+	}
+
 }

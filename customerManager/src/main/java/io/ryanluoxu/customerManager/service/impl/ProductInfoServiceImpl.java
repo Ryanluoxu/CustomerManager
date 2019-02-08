@@ -56,4 +56,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		return productInfoDao.getActive(productInfoId);
 	}
 
+	@Override
+	public List<ProductInfo> findByCompanyInfoId(Long companyInfoId) {
+		return productInfoDao.findByCompanyInfoId(companyInfoId);
+	}
+
 }

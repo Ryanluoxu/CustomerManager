@@ -28,7 +28,7 @@ public class CompanyInfoRestController {
 	ResponseModel<CompanyInfoVO> add(@RequestBody CompanyInfoInput companyInfoInput){
 		ResponseModel<CompanyInfoVO> response = new ResponseModel<>();
 		try {
-			companyInfoController.validateInput(companyInfoInput, ActionTypeConstant.ACTION_TYPE_ADD);
+			companyInfoController.validate(companyInfoInput, ActionTypeConstant.ACTION_TYPE_ADD);
 			CompanyInfoVO companyInfoVO = companyInfoController.add(companyInfoInput);
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
 			response.setData(companyInfoVO);
@@ -43,7 +43,7 @@ public class CompanyInfoRestController {
 	ResponseModel<CompanyInfoVO> update(@RequestBody CompanyInfoInput companyInfoInput){
 		ResponseModel<CompanyInfoVO> response = new ResponseModel<>();
 		try {
-			companyInfoController.validateInput(companyInfoInput, ActionTypeConstant.ACTION_TYPE_UPDATE);
+			companyInfoController.validate(companyInfoInput, ActionTypeConstant.ACTION_TYPE_UPDATE);
 			CompanyInfoVO companyInfoVO = companyInfoController.update(companyInfoInput);
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
 			response.setData(companyInfoVO);
@@ -58,7 +58,7 @@ public class CompanyInfoRestController {
 	ResponseModel<CompanyInfoVO> delete(@RequestBody CompanyInfoInput companyInfoInput){
 		ResponseModel<CompanyInfoVO> response = new ResponseModel<>();
 		try {
-			companyInfoController.validateInput(companyInfoInput, ActionTypeConstant.ACTION_TYPE_DELETE);
+			companyInfoController.validate(companyInfoInput, ActionTypeConstant.ACTION_TYPE_DELETE);
 			CompanyInfoVO companyInfoVO = companyInfoController.delete(companyInfoInput);
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
 			response.setData(companyInfoVO);
