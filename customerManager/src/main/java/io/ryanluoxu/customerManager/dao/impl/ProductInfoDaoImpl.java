@@ -15,15 +15,8 @@ import io.ryanluoxu.customerManager.dao.ProductInfoDao;
 @Repository
 public class ProductInfoDaoImpl extends GenericDaoImpl<ProductInfo, Long> implements ProductInfoDao {
 
-	private static String STATUS = "status";
 	private static String PRODUCT_INFO_ID = "productInfoId";
 	private static String COMPANY_INFO_ID = "companyInfoId";
-
-	@Override
-	public List<ProductInfo> findActive() {
-		CriteriaQuery<ProductInfo> criteriaQuery = getCriteriaQuery(QUERY_TYPE_EQUAL, STATUS, StatusConstant.ACTIVE);
-		return getSession().createQuery(criteriaQuery).getResultList();
-	}
 
 	@Override
 	public ProductInfo getActive(Long productInfoId) {

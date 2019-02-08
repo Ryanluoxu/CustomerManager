@@ -26,7 +26,7 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 	private CustomerInfoService customerInfoService;
 
 	@Override
-	public CustomerInfoVO add(CustomerInfoInput customerInfoInput) throws CommonException {
+	public CustomerInfoVO add(CustomerInfoInput customerInfoInput) {
 		CustomerInfoVO customerInfoVO = convertToVO(customerInfoService.add(convertToBean(customerInfoInput)));
 		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, customerInfoVO.toString());
 		return customerInfoVO;
@@ -42,7 +42,7 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 	}
 
 	@Override
-	public CustomerInfoVO update(CustomerInfoInput customerInfoInput) throws CommonException {
+	public CustomerInfoVO update(CustomerInfoInput customerInfoInput) {
 		CustomerInfo customerInfo = customerInfoService.getById(customerInfoInput.getCustomerInfoId());
 		customerInfo.setAddress(customerInfoInput.getAddress());
 		customerInfo.setCompanyName(customerInfoInput.getCompanyName());
@@ -59,7 +59,7 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 	}
 
 	@Override
-	public List<CustomerInfoVO> findAll() throws CommonException {
+	public List<CustomerInfoVO> findAll() {
 		List<CustomerInfoVO> customerInfoVOs = new ArrayList<>();
 		List<CustomerInfo> customerInfos = customerInfoService.findActive();
 		for (CustomerInfo customerInfo : customerInfos) {

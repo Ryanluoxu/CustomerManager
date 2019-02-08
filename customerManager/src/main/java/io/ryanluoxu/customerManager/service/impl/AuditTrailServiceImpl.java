@@ -42,4 +42,24 @@ public class AuditTrailServiceImpl implements AuditTrailService {
 		return add(auditTrail);
 	}
 
+	@Override
+	public AuditTrail update(AuditTrail t) {
+		return null;
+	}
+
+	@Override
+	public AuditTrail deleteById(Long id) {
+		return null;
+	}
+
+	@Override
+	public List<AuditTrail> findActive() {
+		return null;
+	}
+
+	@Override
+	public AuditTrail getActive(Long id) {
+		return null;
+	}
+
 }

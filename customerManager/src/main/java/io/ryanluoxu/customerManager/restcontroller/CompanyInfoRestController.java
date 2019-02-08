@@ -76,9 +76,9 @@ public class CompanyInfoRestController {
 			List<CompanyInfoVO> companyInfoVOs = companyInfoController.findAll();
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
 			response.setData(companyInfoVOs);
-		} catch (CommonException e) {
+		} catch (Exception e) {
 			response.setStatus(StatusConstant.RESPONSE_FAIL);
-			response.setErrorMsg(e.getErrorMsg());
+			response.setErrorMsg(e.toString());
 		}
 		return response;
 	}

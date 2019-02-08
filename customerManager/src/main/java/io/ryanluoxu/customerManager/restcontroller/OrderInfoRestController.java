@@ -12,26 +12,26 @@ import org.springframework.web.bind.annotation.RestController;
 import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.base.exception.CommonException;
-import io.ryanluoxu.customerManager.bean.input.ProductInfoInput;
-import io.ryanluoxu.customerManager.bean.vo.ProductInfoVO;
+import io.ryanluoxu.customerManager.bean.input.OrderInfoInput;
+import io.ryanluoxu.customerManager.bean.vo.OrderInfoVO;
 import io.ryanluoxu.customerManager.bean.vo.ResponseModel;
-import io.ryanluoxu.customerManager.controller.ProductInfoController;
+import io.ryanluoxu.customerManager.controller.OrderInfoController;
 
 @RestController
-@RequestMapping("/productInfo")
-public class ProductInfoRestController {
+@RequestMapping("/orderInfo")
+public class OrderInfoRestController {
 
 	@Autowired
-	private ProductInfoController productInfoController;
+	private OrderInfoController orderInfoController;
 
 	@PostMapping("/add")
-	ResponseModel<ProductInfoVO> add(@RequestBody ProductInfoInput productInfoInput){
-		ResponseModel<ProductInfoVO> response = new ResponseModel<>();
+	ResponseModel<OrderInfoVO> add(@RequestBody OrderInfoInput orderInfoInput){
+		ResponseModel<OrderInfoVO> response = new ResponseModel<>();
 		try {
-			productInfoController.validate(productInfoInput, ActionTypeConstant.ACTION_TYPE_ADD);
-			ProductInfoVO productInfoVO = productInfoController.add(productInfoInput);
+			orderInfoController.validate(orderInfoInput, ActionTypeConstant.ACTION_TYPE_ADD);
+			OrderInfoVO orderInfoVO = orderInfoController.add(orderInfoInput);
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
-			response.setData(productInfoVO);
+			response.setData(orderInfoVO);
 		} catch (CommonException e) {
 			response.setStatus(StatusConstant.RESPONSE_FAIL);
 			response.setErrorMsg(e.getErrorMsg());
@@ -40,13 +40,13 @@ public class ProductInfoRestController {
 	}
 	
 	@PostMapping("/update")
-	ResponseModel<ProductInfoVO> update(@RequestBody ProductInfoInput productInfoInput){
-		ResponseModel<ProductInfoVO> response = new ResponseModel<>();
+	ResponseModel<OrderInfoVO> update(@RequestBody OrderInfoInput orderInfoInput){
+		ResponseModel<OrderInfoVO> response = new ResponseModel<>();
 		try {
-			productInfoController.validate(productInfoInput, ActionTypeConstant.ACTION_TYPE_UPDATE);
-			ProductInfoVO productInfoVO = productInfoController.update(productInfoInput);
+			orderInfoController.validate(orderInfoInput, ActionTypeConstant.ACTION_TYPE_UPDATE);
+			OrderInfoVO orderInfoVO = orderInfoController.update(orderInfoInput);
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
-			response.setData(productInfoVO);
+			response.setData(orderInfoVO);
 		} catch (CommonException e) {
 			response.setStatus(StatusConstant.RESPONSE_FAIL);
 			response.setErrorMsg(e.getErrorMsg());
@@ -55,13 +55,13 @@ public class ProductInfoRestController {
 	}
 
 	@PostMapping("/delete")
-	ResponseModel<ProductInfoVO> delete(@RequestBody ProductInfoInput productInfoInput){
-		ResponseModel<ProductInfoVO> response = new ResponseModel<>();
+	ResponseModel<OrderInfoVO> delete(@RequestBody OrderInfoInput orderInfoInput){
+		ResponseModel<OrderInfoVO> response = new ResponseModel<>();
 		try {
-			productInfoController.validate(productInfoInput, ActionTypeConstant.ACTION_TYPE_DELETE);
-			ProductInfoVO productInfoVO = productInfoController.delete(productInfoInput);
+			orderInfoController.validate(orderInfoInput, ActionTypeConstant.ACTION_TYPE_DELETE);
+			OrderInfoVO orderInfoVO = orderInfoController.delete(orderInfoInput);
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
-			response.setData(productInfoVO);
+			response.setData(orderInfoVO);
 		} catch (CommonException e) {
 			response.setStatus(StatusConstant.RESPONSE_FAIL);
 			response.setErrorMsg(e.getErrorMsg());
@@ -70,12 +70,12 @@ public class ProductInfoRestController {
 	}
 
 	@GetMapping("/findAll")
-	ResponseModel<List<ProductInfoVO>> findAll(){
-		ResponseModel<List<ProductInfoVO>> response = new ResponseModel<>();
+	ResponseModel<List<OrderInfoVO>> findAll(){
+		ResponseModel<List<OrderInfoVO>> response = new ResponseModel<>();
 		try {
-			List<ProductInfoVO> productInfoVOs = productInfoController.findAll();
+			List<OrderInfoVO> orderInfoVOs = orderInfoController.findAll();
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
-			response.setData(productInfoVOs);
+			response.setData(orderInfoVOs);
 		} catch (Exception e) {
 			response.setStatus(StatusConstant.RESPONSE_FAIL);
 			response.setErrorMsg(e.toString());

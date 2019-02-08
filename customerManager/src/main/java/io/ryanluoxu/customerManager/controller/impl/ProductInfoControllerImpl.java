@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.base.exception.CommonException;
-import io.ryanluoxu.customerManager.base.exception.ProductInfoException;
 import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
 import io.ryanluoxu.customerManager.bean.entity.ProductInfo;
 import io.ryanluoxu.customerManager.bean.input.ProductInfoInput;
@@ -19,7 +18,7 @@ import io.ryanluoxu.customerManager.controller.ProductInfoController;
 public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, ProductInfoVO, ProductInfoInput> implements ProductInfoController {
 	
 	@Override
-	public List<ProductInfoVO> findAll() throws ProductInfoException {
+	public List<ProductInfoVO> findAll() {
 		List<ProductInfoVO> productInfoVOs = new ArrayList<>();
 		List<ProductInfo> productInfos = productInfoService.findActive();
 		for (ProductInfo productInfo : productInfos) {
@@ -32,14 +31,14 @@ public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, P
 	}
 
 	@Override
-	public ProductInfoVO add(ProductInfoInput productInfoInput) throws ProductInfoException {
+	public ProductInfoVO add(ProductInfoInput productInfoInput) {
 		ProductInfoVO productInfoVO = convertToVO(productInfoService.add(convertToBean(productInfoInput)));
 		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, productInfoVO.toString());
 		return productInfoVO;
 	}
 
 	@Override
-	public ProductInfoVO update(ProductInfoInput productInfoInput) throws ProductInfoException {
+	public ProductInfoVO update(ProductInfoInput productInfoInput) {
 		ProductInfo productInfo = productInfoService.getById(productInfoInput.getProductInfoId());
 		productInfo.setCompanyInfoId(productInfoInput.getCompanyInfoId());
 		productInfo.setProductName(productInfoInput.getProductName());

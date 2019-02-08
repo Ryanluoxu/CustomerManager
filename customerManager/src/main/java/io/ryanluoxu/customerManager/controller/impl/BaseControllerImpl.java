@@ -7,9 +7,12 @@ import io.ryanluoxu.customerManager.base.util.ClassUtil;
 import io.ryanluoxu.customerManager.controller.BaseController;
 import io.ryanluoxu.customerManager.service.AuditTrailService;
 import io.ryanluoxu.customerManager.service.CompanyInfoService;
+import io.ryanluoxu.customerManager.service.CustomerInfoService;
+import io.ryanluoxu.customerManager.service.OrderInfoService;
 import io.ryanluoxu.customerManager.service.ProductInfoService;
 import io.ryanluoxu.customerManager.validator.CompanyInfoValidator;
 import io.ryanluoxu.customerManager.validator.CustomerInfoValidator;
+import io.ryanluoxu.customerManager.validator.OrderInfoValidator;
 import io.ryanluoxu.customerManager.validator.ProductInfoValidator;
 
 public abstract class BaseControllerImpl<T, TVO, TInput> implements BaseController<T, TVO, TInput> {
@@ -27,6 +30,10 @@ public abstract class BaseControllerImpl<T, TVO, TInput> implements BaseControll
 	protected CompanyInfoService companyInfoService;
 	@Autowired
 	protected ProductInfoService productInfoService;
+	@Autowired
+	protected CustomerInfoService customerInfoService;
+	@Autowired
+	protected OrderInfoService orderInfoService;
 	
 	@Autowired
 	protected CompanyInfoValidator companyInfoValidator;
@@ -34,6 +41,8 @@ public abstract class BaseControllerImpl<T, TVO, TInput> implements BaseControll
 	protected ProductInfoValidator productInfoValidator;
 	@Autowired
 	protected CustomerInfoValidator customerInfoValidator;
+	@Autowired
+	protected OrderInfoValidator orderInfoValidator;
 
 	
 	public BaseControllerImpl() {

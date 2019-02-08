@@ -15,6 +15,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
+import io.ryanluoxu.customerManager.base.constant.CompanyInfoConstant;
 import io.ryanluoxu.customerManager.base.util.ClassUtil;
 import io.ryanluoxu.customerManager.base.util.JpaUtil;
 import io.ryanluoxu.customerManager.bean.input.QueryInput;
@@ -25,7 +26,8 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
 	@SuppressWarnings("rawtypes")
 	protected Class targetClass;
 	
-	protected final String QUERY_TYPE_EQUAL = "equal";
+	protected String QUERY_TYPE_EQUAL = "equal";
+	protected String STATUS = "status";
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -133,6 +135,12 @@ public class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T,
 		tx.commit();
 		em.close();
 		return t;
+	}
+
+	@Override
+	public List<T> findActive() {
+		CriteriaQuery<T> criteriaQuery = getCriteriaQuery(QUERY_TYPE_EQUAL, STATUS, CompanyInfoConstant.STATUS_ACTIVE);
+		return getSession().createQuery(criteriaQuery).getResultList();		
 	}
 
 }

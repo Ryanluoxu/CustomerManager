@@ -8,21 +8,21 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.springframework.stereotype.Repository;
 
 import io.ryanluoxu.customerManager.base.constant.CompanyInfoConstant;
-import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
+import io.ryanluoxu.customerManager.bean.entity.OrderInfo;
 import io.ryanluoxu.customerManager.bean.input.QueryInput;
-import io.ryanluoxu.customerManager.dao.CompanyInfoDao;
+import io.ryanluoxu.customerManager.dao.OrderInfoDao;
 
 @Repository
-public class CompanyInfoDaoImpl extends GenericDaoImpl<CompanyInfo, Long> implements CompanyInfoDao {
+public class OrderInfoDaoImpl extends GenericDaoImpl<OrderInfo, Long> implements OrderInfoDao {
 
-	private static String COMPANY_INFO_ID = "companyInfoId";
+	private static String ORDER_INFO_ID = "companyInfoId";
 
 	@Override
-	public CompanyInfo getActive(Long companyInfoId) {
+	public OrderInfo getActive(Long id) {
 		List<QueryInput> queryInputs = new ArrayList<>();
 		queryInputs.add(new QueryInput(QUERY_TYPE_EQUAL, STATUS, CompanyInfoConstant.STATUS_ACTIVE));
-		queryInputs.add(new QueryInput(QUERY_TYPE_EQUAL, COMPANY_INFO_ID, String.valueOf(companyInfoId)));
-		CriteriaQuery<CompanyInfo> criteriaQuery = getCriteriaQuery(queryInputs);
+		queryInputs.add(new QueryInput(QUERY_TYPE_EQUAL, ORDER_INFO_ID, String.valueOf(id)));
+		CriteriaQuery<OrderInfo> criteriaQuery = getCriteriaQuery(queryInputs);
 		return getSession().createQuery(criteriaQuery).getSingleResult();	
 	}
 

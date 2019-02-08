@@ -1,6 +1,6 @@
 package io.ryanluoxu.customerManager.bean.input;
 
-public class OrderInfoInp {
+public class OrderInfoInput {
 	private Long orderInfoId;
 	private Long customerInfoId;
 	private Long productInfoId;

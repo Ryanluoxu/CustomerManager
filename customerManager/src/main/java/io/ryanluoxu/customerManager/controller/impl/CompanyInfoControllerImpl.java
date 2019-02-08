@@ -22,7 +22,7 @@ public class CompanyInfoControllerImpl extends BaseControllerImpl<CompanyInfo, C
 	private ProductInfoController productInfoController;
 
 	@Override
-	public List<CompanyInfoVO> findAll() throws CommonException {
+	public List<CompanyInfoVO> findAll() {
 		List<CompanyInfoVO> companyInfoVOs = new ArrayList<>();
 		List<CompanyInfo> companyInfos = companyInfoService.findActive();
 		for (CompanyInfo companyInfo : companyInfos) {
@@ -33,14 +33,14 @@ public class CompanyInfoControllerImpl extends BaseControllerImpl<CompanyInfo, C
 	}
 
 	@Override
-	public CompanyInfoVO add(CompanyInfoInput companyInfoInput) throws CommonException {
+	public CompanyInfoVO add(CompanyInfoInput companyInfoInput) {
 		CompanyInfoVO companyInfoVO = convertToVO(companyInfoService.add(convertToBean(companyInfoInput)));
 		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, companyInfoVO.toString());
 		return companyInfoVO;
 	}
 
 	@Override
-	public CompanyInfoVO update(CompanyInfoInput companyInfoInput) throws CommonException {
+	public CompanyInfoVO update(CompanyInfoInput companyInfoInput) {
 		CompanyInfo companyInfo = companyInfoService.getById(companyInfoInput.getCompanyInfoId());
 		companyInfo.setCompanyName(companyInfoInput.getCompanyName());
 		companyInfo.setCountry(companyInfoInput.getCountry());

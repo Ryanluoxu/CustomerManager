@@ -18,6 +18,8 @@ public class CommonError {
 	public static String INVALID_CUSTOMER_INFO_ID = "Error : invalid customer info id.";
 
 	// COMPANY_INFO
+	public static String MISSING_COMPANY_INFO_ID = "Error : missing company info id.";
+	
 	public static String INVALID_COMPANY_INFO_ID = "Error : invalid company info id.";
 	
 	// PRODUCT_INFO

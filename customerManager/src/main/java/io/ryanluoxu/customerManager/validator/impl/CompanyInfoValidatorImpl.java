@@ -63,7 +63,9 @@ public class CompanyInfoValidatorImpl implements CompanyInfoValidator {
 		}
 	}
 	private void checkMissingCompanyInfoId(CompanyInfoInput companyInfoInput) throws CommonException {
-		
+		if (companyInfoInput.getCompanyInfoId() == null) {
+			throw new CommonException(CommonError.MISSING_COMPANY_INFO_ID);
+		}
 	}
 	
 	/**

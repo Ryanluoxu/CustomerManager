@@ -76,9 +76,9 @@ public class CustomerInfoRestController {
 			List<CustomerInfoVO> customerInfoVOs = customerInfoController.findAll();
 			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
 			response.setData(customerInfoVOs);
-		} catch (CommonException e) {
+		} catch (Exception e) {
 			response.setStatus(StatusConstant.RESPONSE_FAIL);
-			response.setErrorMsg(e.getErrorMsg());
+			response.setErrorMsg(e.toString());
 		}
 		return response;
 	}

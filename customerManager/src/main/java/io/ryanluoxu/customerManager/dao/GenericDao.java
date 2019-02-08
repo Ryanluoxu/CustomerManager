@@ -13,6 +13,7 @@ public interface GenericDao<T, ID extends Serializable> {
 	 * Find
 	 */
 	List<T> findAll();
+	List<T> findActive();
 	T getById(ID id);
 	
 	/**
@@ -23,6 +24,6 @@ public interface GenericDao<T, ID extends Serializable> {
 	/**
 	 * Delete
 	 */
-	T deleteById(ID id);
+	T deleteById(ID id);	
 	
 }

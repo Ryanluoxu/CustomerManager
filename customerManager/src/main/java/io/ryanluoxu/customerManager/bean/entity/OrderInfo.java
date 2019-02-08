@@ -33,7 +33,15 @@ public class OrderInfo implements Serializable{
 	private double quantity;
 	@Column(name="profit")
 	private double profit;
+	@Column(name="status")
+	private String status;
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Long getProductInfoId() {
 		return productInfoId;
 	}
