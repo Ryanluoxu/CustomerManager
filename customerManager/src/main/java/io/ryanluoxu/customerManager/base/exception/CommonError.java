@@ -27,5 +27,8 @@ public class CommonError {
 	public static String MISSING_PRODUCT_NAME = "Error : missing product name.";
 	public static String INVALID_PRODUCT_INFO_ID = "Error : invalid product info id.";
 	
+	// ORDER_INFO
+	public static String MISSING_ORDER_INFO_ID = "Error : missing order info id.";
+	
 	
 }

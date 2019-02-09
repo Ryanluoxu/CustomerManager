@@ -1,6 +1,7 @@
 package io.ryanluoxu.customerManager.bean.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +36,15 @@ public class OrderInfo implements Serializable{
 	private double profit;
 	@Column(name="status")
 	private String status;
+	@Column(name="created_date")
+	private Date createdDate;
 	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 	public String getStatus() {
 		return status;
 	}

@@ -56,7 +56,7 @@ public class OrderInfoValidatorImpl implements OrderInfoValidator {
 	 */
 	private void checkMissingOrderInfoId(OrderInfoInput orderInfoInput) throws CommonException {
 		if (orderInfoInput.getOrderInfoId() == null) {
-			throw new CommonException(CommonError.MISSING_COMPANY_INFO_ID);
+			throw new CommonException(CommonError.MISSING_ORDER_INFO_ID);
 		}
 	}
 	
@@ -66,7 +66,7 @@ public class OrderInfoValidatorImpl implements OrderInfoValidator {
 	private void validateOrderInfoId(OrderInfoInput orderInfoInput) throws CommonException {
 		OrderInfo orderInfo = orderInfoService.getActive(orderInfoInput.getOrderInfoId());
 		if (orderInfo == null) {
-			throw new CommonException(CommonError.INVALID_PRODUCT_INFO_ID);
+			throw new CommonException(CommonError.MISSING_ORDER_INFO_ID);
 		}
 	}
 

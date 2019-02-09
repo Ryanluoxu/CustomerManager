@@ -1,6 +1,7 @@
 <div class="jumbotron text-center">
-	<h2>Add Order</h2>
+	<h2>Edit Order</h2>
 	<br>
+	
 	<!-- add TABLE -->
 	<div class="container" ng-show="!isPreview">
 		<form>
@@ -43,6 +44,7 @@
 				</div>
 			</div>
 			<button ng-click="preview()" class="btn btn-default">Next</button>
+			<button ng-click="deleteOrderInfo(orderInfo.orderInfoId)" class="btn btn-default">Delete</button>
 		</form>
 	</div>
 	
@@ -73,7 +75,7 @@
 				<label class="col-sm-2 col-form-label">Profit</label>
 				<div class="col-sm-8">{{orderInfo.profit}}</div>
 			</div>
-			<button ng-click="addOrderInfo(orderInfo)" class="btn btn-warning">Submit</button>
+			<button ng-click="updateOrderInfo(orderInfo)" class="btn btn-default">Submit</button>
 		</form>
 	</div>
 

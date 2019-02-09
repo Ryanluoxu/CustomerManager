@@ -15,7 +15,7 @@ import io.ryanluoxu.customerManager.dao.OrderInfoDao;
 @Repository
 public class OrderInfoDaoImpl extends GenericDaoImpl<OrderInfo, Long> implements OrderInfoDao {
 
-	private static String ORDER_INFO_ID = "companyInfoId";
+	private static String ORDER_INFO_ID = "orderInfoId";
 
 	@Override
 	public OrderInfo getActive(Long id) {

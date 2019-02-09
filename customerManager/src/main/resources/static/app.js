@@ -26,6 +26,9 @@ app.config(function($routeProvider) {
 	}).when('/orderInfo/add', {
 		templateUrl : 'pages/orderInfo/add.html',
 		controller : 'orderInfoController'
+	}).when('/orderInfo/edit', {
+		templateUrl : 'pages/orderInfo/edit.html',
+		controller : 'orderInfoController'
 	})
 	
 	.when('/companyInfo', {

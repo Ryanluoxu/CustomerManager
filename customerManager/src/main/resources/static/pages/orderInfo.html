@@ -27,13 +27,13 @@
 				<tbody class="table-light">
 					<tr ng-repeat="orderInfoVO in orderInfoVOs | filter : searchText">
 						<td scope="row">{{orderInfoVO.orderInfoId}}</td>
-                        <td>{{orderInfoVO.customerInfo.customerName}}</td>
+                        <td>{{orderInfoVO.customerName}}</td>
                         <td>{{orderInfoVO.productName}}</td>
                         <td>{{orderInfoVO.paymentMode}}</td>
                         <td>{{orderInfoVO.unitPrice}}</td>
                         <td>{{orderInfoVO.quantity}}</td>
                         <td>{{orderInfoVO.profit}}</td>
-                        <td><button class="btn btn-primary" ng-click="deleteCustomerInfo(orderInfoVO.orderInfoId)">Remove</button></td>
+                        <td><button class="btn btn-primary" ng-click="editOrderInfo(orderInfoVO)">Edit</button></td>
 					</tr>
 				</tbody>
 			</table>
