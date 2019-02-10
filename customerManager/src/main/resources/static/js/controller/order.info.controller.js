@@ -9,6 +9,16 @@ app.controller('orderInfoController', function($scope, $http, $rootScope, $locat
 			$scope.message = status;
 		})
 	}
+	$scope.findOrderInfoByCustomerInfoId = function(customerInfoId) {
+		var input = {
+				"customerInfoId":customerInfoId,
+		}
+		$http.post("/orderInfo/findByCustomerInfoId", input).success(function(data, status, headers, config) {
+			$scope.orderInfoVOs = data.data;
+		}).error(function(data, status, headers, config) {
+			$scope.message = status;
+		})
+	}
 	$scope.findAllProductInfo = function() {
 		$http.get("/productInfo/findAll").success(function(data, status, headers, config) {
 			$scope.productInfoVOs = data.data;
@@ -94,7 +104,12 @@ app.controller('orderInfoController', function($scope, $http, $rootScope, $locat
 	}
  
 	$scope.isPreview = false;
-	$scope.findAllOrderInfo();
+	if ($rootScope.seletedCustomerInfo) {
+		$scope.findOrderInfoByCustomerInfoId($rootScope.seletedCustomerInfo.customerInfoId);
+		$rootScope.seletedCustomerInfo = null;
+	} else {
+		$scope.findAllOrderInfo();
+	}
 	$scope.findAllProductInfo();
 	$scope.findAllCustomerInfo();
 });

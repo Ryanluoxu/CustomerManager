@@ -16,5 +16,8 @@ app.controller('mainController', function($scope, $http, $location, $rootScope) 
 	$scope.showProductInfo = function() {
 		$location.url("/productInfo")
 	}
+	$scope.goHome = function() {
+		$location.url("/")
+	}
 
 });

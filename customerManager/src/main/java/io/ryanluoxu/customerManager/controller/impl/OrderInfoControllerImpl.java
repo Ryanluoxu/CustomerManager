@@ -23,12 +23,7 @@ public class OrderInfoControllerImpl extends BaseControllerImpl<OrderInfo, Order
 		List<OrderInfoVO> orderInfoVOs = new ArrayList<>();
 		List<OrderInfo> orderInfos = orderInfoService.findActive();
 		for (OrderInfo orderInfo : orderInfos) {
-			ProductInfo productInfo = productInfoService.getById(orderInfo.getProductInfoId());
-			CustomerInfo customerInfo = customerInfoService.getById(orderInfo.getCustomerInfoId());
-			OrderInfoVO orderInfoVO = convertToVO(orderInfo);
-			orderInfoVO.setCustomerName(customerInfo.getCustomerName());
-			orderInfoVO.setProductName(productInfo.getProductName());
-			orderInfoVOs.add(orderInfoVO);
+			orderInfoVOs.add(populateVO(orderInfo));
 		}
 		return orderInfoVOs;
 	}
@@ -67,6 +62,25 @@ public class OrderInfoControllerImpl extends BaseControllerImpl<OrderInfo, Order
 	public void validate(OrderInfoInput input, String actionType) throws CommonException {
 		orderInfoValidator.validateMandatoryFields(input, actionType);
 		orderInfoValidator.validateInputValue(input, actionType);
+	}
+
+	@Override
+	public List<OrderInfoVO> findByCustomerInfoId(Long customerInfoId) {
+		List<OrderInfoVO> orderInfoVOs = new ArrayList<>();
+		List<OrderInfo> orderInfos = orderInfoService.findByCustomerInfoId(customerInfoId);
+		for (OrderInfo orderInfo : orderInfos) {
+			orderInfoVOs.add(populateVO(orderInfo));
+		}
+		return orderInfoVOs;
+	}
+
+	private OrderInfoVO populateVO(OrderInfo orderInfo) {
+		OrderInfoVO orderInfoVO = convertToVO(orderInfo);
+		ProductInfo productInfo = productInfoService.getById(orderInfo.getProductInfoId());
+		CustomerInfo customerInfo = customerInfoService.getById(orderInfo.getCustomerInfoId());
+		orderInfoVO.setCustomerName(customerInfo.getCustomerName());
+		orderInfoVO.setProductName(productInfo.getProductName());
+		return orderInfoVO;
 	}
 
 }

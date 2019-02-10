@@ -82,5 +82,23 @@ public class OrderInfoRestController {
 		}
 		return response;
 	}
+	
+	@PostMapping("/findByCustomerInfoId")
+	ResponseModel<List<OrderInfoVO>> findByCustomerInfoId(@RequestBody OrderInfoInput orderInfoInput){
+		ResponseModel<List<OrderInfoVO>> response = new ResponseModel<>();
+		try {
+			orderInfoController.validate(orderInfoInput, ActionTypeConstant.ACTION_TYPE_FIND);
+			List<OrderInfoVO> orderInfoVOs = orderInfoController.findByCustomerInfoId(orderInfoInput.getCustomerInfoId());
+			response.setStatus(StatusConstant.RESPONSE_SUCCESS);
+			response.setData(orderInfoVOs);
+		} catch (Exception e) {
+			response.setStatus(StatusConstant.RESPONSE_FAIL);
+			response.setErrorMsg(e.toString());
+		}
+		return response;
+	}
+	
+	
+	
 
 }

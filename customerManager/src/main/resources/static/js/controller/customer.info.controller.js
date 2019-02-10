@@ -89,7 +89,11 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 	$scope.goToCustomerInfoAdd = function(){
 		$location.url("/customerInfo/add");
 	}
-
+	$scope.showOrderInfo = function(customerInfoVO){
+		$rootScope.seletedCustomerInfo = customerInfoVO;
+		$location.url("/orderInfo");
+	}
+	
 	$scope.isPreview = false;
 	$scope.findAllCustomerInfo();
 });

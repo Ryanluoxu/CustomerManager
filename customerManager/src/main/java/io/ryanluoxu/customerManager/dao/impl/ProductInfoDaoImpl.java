@@ -1,15 +1,15 @@
 package io.ryanluoxu.customerManager.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
 import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.bean.entity.ProductInfo;
-import io.ryanluoxu.customerManager.bean.input.QueryInput;
 import io.ryanluoxu.customerManager.dao.ProductInfoDao;
 
 @Repository
@@ -19,12 +19,19 @@ public class ProductInfoDaoImpl extends GenericDaoImpl<ProductInfo, Long> implem
 	private static String COMPANY_INFO_ID = "companyInfoId";
 
 	@Override
-	public ProductInfo getActive(Long productInfoId) {
-		List<QueryInput> queryInputs = new ArrayList<>();
-		queryInputs.add(new QueryInput(QUERY_TYPE_EQUAL, STATUS, StatusConstant.ACTIVE));
-		queryInputs.add(new QueryInput(QUERY_TYPE_EQUAL, PRODUCT_INFO_ID, String.valueOf(productInfoId)));
-		CriteriaQuery<ProductInfo> criteriaQuery = getCriteriaQuery(queryInputs);
-		return getSession().createQuery(criteriaQuery).getSingleResult();
+	public ProductInfo getActive(Long id) {
+		CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
+		CriteriaQuery<ProductInfo> criteriaQuery = criteriaBuilder.createQuery(ProductInfo.class);
+		Root<ProductInfo> root = criteriaQuery.from(ProductInfo.class);
+		criteriaQuery.select(root);
+
+		criteriaQuery.where(
+				criteriaBuilder.and(
+						criteriaBuilder.equal(root.get(PRODUCT_INFO_ID), id),
+						criteriaBuilder.equal(root.get(STATUS), StatusConstant.ACTIVE)
+				));		
+		
+		return getSession().createQuery(criteriaQuery).getSingleResult();	
 	}
 
 	@Override

@@ -56,4 +56,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		return orderInfoDao.getActive(orderInfoId);
 	}
 
+	@Override
+	public List<OrderInfo> findByCustomerInfoId(Long customerInfoId) {
+		return orderInfoDao.findByCustomerInfoId(customerInfoId);
+	}
+
 }

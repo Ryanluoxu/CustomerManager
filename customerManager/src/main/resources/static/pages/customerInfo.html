@@ -17,9 +17,9 @@
 						<th scope="col">ID</th>
 						<th scope="col">Name</th>
 						<th scope="col">Company</th>
-						<th scope="col">function</th>
-						<th scope="col">email</th>
-						<th scope="col">country</th>
+						<th scope="col">Function</th>
+						<th scope="col">Email</th>
+						<th scope="col">Country</th>
 						<th scope="col">Mobile Number</th>
 						<th scope="col">Office  Number</th>
 						<th scope="col">Fax Number</th>
@@ -30,10 +30,10 @@
 				<tbody class="table-light">
 					<tr ng-repeat="customerInfoVO in customerInfoVOs | filter : searchText">
 						<td scope="row">{{customerInfoVO.customerInfoId}}</td>
-                        <td>{{customerInfoVO.customerName}}</td>
+                        <td><button class="btn btn-default" ng-click="showOrderInfo(customerInfoVO)">{{customerInfoVO.customerName}}</button></td>
                         <td>{{customerInfoVO.companyName}}</td>
-                        <td>{{customerInfoVO.email}}</td>
                         <td>{{customerInfoVO.function}}</td>
+                        <td>{{customerInfoVO.email}}</td>
                         <td>{{customerInfoVO.country}}</td>
                         <td>{{customerInfoVO.contactMobile}}</td>
                         <td>{{customerInfoVO.contactOffice}}</td>
