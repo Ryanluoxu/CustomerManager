@@ -31,6 +31,9 @@ public class CommonError {
 	public static String MISSING_ORDER_INFO_ID = "Error : missing order info id.";
 	
 	public static String INVALID_ORDER_INFO_ID = "Error : invalid order info id.";
+	public static String INVALID_ORDER_QUANTITY = "Error : invalid order quantity.";
+	public static String INVALID_ORDER_UNIT_PRICE = "Error : invalid order unit price.";
+	
 	
 	
 }

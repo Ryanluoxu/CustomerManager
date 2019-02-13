@@ -1,5 +1,7 @@
 package io.ryanluoxu.customerManager.validator.impl;
 
+import java.util.function.DoubleUnaryOperator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,9 +42,13 @@ public class OrderInfoValidatorImpl implements OrderInfoValidator {
 		}
 	}
 
+
+
 	@Override
 	public void validateInputValue(OrderInfoInput orderInfoInput, String actionType) throws CommonException {
 		if (ActionTypeConstant.ACTION_TYPE_ADD.equals(actionType)) {
+			validatePrice(orderInfoInput);
+			validateQuantity(orderInfoInput);
 			
 		} else if (ActionTypeConstant.ACTION_TYPE_UPDATE.equals(actionType)) {
 			validateOrderInfoId(orderInfoInput);
@@ -58,6 +64,8 @@ public class OrderInfoValidatorImpl implements OrderInfoValidator {
 		}
 	}
 
+
+
 	/**
 	 * check missing fields
 	 */
@@ -72,7 +80,8 @@ public class OrderInfoValidatorImpl implements OrderInfoValidator {
 			throw new CommonException(CommonError.MISSING_CUSTOMER_INFO_ID);
 		}
 	}
-
+	
+	
 	/**
 	 * validate fields
 	 */
@@ -87,6 +96,18 @@ public class OrderInfoValidatorImpl implements OrderInfoValidator {
 		CustomerInfo bean = customerInfoService.getActive(orderInfoInput.getCustomerInfoId());
 		if (bean == null) {
 			throw new CommonException(CommonError.INVALID_CUSTOMER_INFO_ID);
+		}
+	}
+
+	private void validateQuantity(OrderInfoInput orderInfoInput) throws CommonException {
+		if (orderInfoInput.getQuantity() <= 0.0) {
+			throw new CommonException(CommonError.INVALID_ORDER_QUANTITY);
+		}
+	}
+
+	private void validatePrice(OrderInfoInput orderInfoInput) throws CommonException {
+		if (orderInfoInput.getUnitPrice() <= 0.0) {
+			throw new CommonException(CommonError.INVALID_ORDER_UNIT_PRICE);
 		}
 	}
 
