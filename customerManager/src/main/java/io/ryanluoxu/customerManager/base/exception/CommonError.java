@@ -25,7 +25,10 @@ public class CommonError {
 	// PRODUCT_INFO
 	public static String MISSING_PRODUCT_INFO_ID = "Error : missing product info id.";
 	public static String MISSING_PRODUCT_NAME = "Error : missing product name.";
+	public static String MISSING_PRODUCT_MAX_PRICE = "Error : missing min price.";
+	public static String MISSING_PRODUCT_MIN_PRICE = "Error : missing max price.";
 	public static String INVALID_PRODUCT_INFO_ID = "Error : invalid product info id.";
+	public static String INVALID_PRODUCT_MIN_MAX_PRICE = "Error : invalid product price: min price is larger than max price.";
 	
 	// ORDER_INFO
 	public static String MISSING_ORDER_INFO_ID = "Error : missing order info id.";

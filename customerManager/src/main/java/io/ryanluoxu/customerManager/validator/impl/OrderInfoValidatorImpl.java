@@ -1,7 +1,5 @@
 package io.ryanluoxu.customerManager.validator.impl;
 
-import java.util.function.DoubleUnaryOperator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

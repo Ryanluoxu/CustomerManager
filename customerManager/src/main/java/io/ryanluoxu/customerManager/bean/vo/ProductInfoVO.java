@@ -10,6 +10,21 @@ public class ProductInfoVO {
 	private String productName;
 	private String status;
 	private Date createdDate;
+	private double minPrice;
+	private double maxPrice;
+	
+	public double getMinPrice() {
+		return minPrice;
+	}
+	public void setMinPrice(double minPrice) {
+		this.minPrice = minPrice;
+	}
+	public double getMaxPrice() {
+		return maxPrice;
+	}
+	public void setMaxPrice(double maxPrice) {
+		this.maxPrice = maxPrice;
+	}
 	public Long getProductInfoId() {
 		return productInfoId;
 	}

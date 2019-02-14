@@ -30,6 +30,23 @@ public class ProductInfo implements Serializable{
 	private String status;
 	@Column(name="created_date")
 	private Date createdDate;
+	@Column(name="min_price")
+	private double minPrice;
+	@Column(name="max_price")
+	private double maxPrice;
+	
+	public double getMinPrice() {
+		return minPrice;
+	}
+	public void setMinPrice(double minPrice) {
+		this.minPrice = minPrice;
+	}
+	public double getMaxPrice() {
+		return maxPrice;
+	}
+	public void setMaxPrice(double maxPrice) {
+		this.maxPrice = maxPrice;
+	}
 	public Long getProductInfoId() {
 		return productInfoId;
 	}

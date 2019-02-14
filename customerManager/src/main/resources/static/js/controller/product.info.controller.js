@@ -22,7 +22,9 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 	$scope.addProductInfo = function(productInfo) {
 		var input = {
 				"productName":productInfo.productName,
-				"companyInfoId":productInfo.companyInfo.companyInfoId
+				"companyInfoId":productInfo.companyInfo.companyInfoId,
+				"minPrice":productInfo.minPrice,
+				"maxPrice":productInfo.maxPrice
 		}
 		$http.post('/productInfo/add', input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {
@@ -46,7 +48,9 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 		var input = {
 				"productInfoId":productInfo.productInfoId,
 				"productName":productInfo.productName,
-				"companyInfoId":productInfo.companyInfo.companyInfoId
+				"companyInfoId":productInfo.companyInfo.companyInfoId,
+				"minPrice":productInfo.minPrice,
+				"maxPrice":productInfo.maxPrice
 		}
 		$http.post('/productInfo/update', input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {

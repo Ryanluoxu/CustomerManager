@@ -17,6 +17,8 @@
 						<th scope="col">ID</th>
 						<th scope="col">Product Name</th>
 						<th scope="col">Company Name</th>
+						<th scope="col">Min Price</th>
+						<th scope="col">Max Price</th>
 						<th scope="col">Action</th>
 					</tr>
 				</thead>
@@ -25,6 +27,8 @@
 						<td scope="row">{{productInfoVO.productInfoId}}</td>
                         <td>{{productInfoVO.productName}}</td>
                         <td>{{productInfoVO.companyName}}</td>
+                        <td>{{productInfoVO.minPrice}}</td>
+                        <td>{{productInfoVO.maxPrice}}</td>
                         <td><button class="btn btn-primary" ng-click="editProductInfo(productInfoVO)">Edit</button></td>
 					</tr>
 				</tbody>
