@@ -19,49 +19,39 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 	$scope.preview = function(){
 		$scope.isPreview = true;
 	}
-	$scope.addProductInfo = function(productInfo) {
+	$scope.addOrUpdateProductInfo = function(productInfo) {
 		var input = {
 				"productName":productInfo.productName,
 				"companyInfoId":productInfo.companyInfo.companyInfoId,
 				"minPrice":productInfo.minPrice,
 				"maxPrice":productInfo.maxPrice
 		}
-		$http.post('/productInfo/add', input).success(function(data, status, headers, config) {
+		var postPath = '/productInfo/add';
+		if ($rootScope.isEdit) {
+			input.productInfoId = productInfo.productInfoId;
+			postPath = '/productInfo/update';
+		}
+		$http.post(postPath, input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {
 				alert("success");
+				$scope.orderInfo = null;
 				$location.url("/productInfo");				
 			} else if (data.status == 'fail') {
 				alert(data.errorMsg);
+				$scope.isPreview = false;
 			}
 		}).error(function(data, status, headers, config) {
 			$scope.message = "fail";
 		})
 	}
 	$scope.goToProductInfoAdd = function(){
-		$location.url("/productInfo/add");
+		$rootScope.isEdit = false;
+		$location.url("/productInfo/addOrEdit");
 	}
 	$scope.editProductInfo = function(productInfoVO) {
 		$rootScope.productInfo = productInfoVO;
-		$location.url("/productInfo/edit");			
-	}
-	$scope.updateProductInfo = function(productInfo) {
-		var input = {
-				"productInfoId":productInfo.productInfoId,
-				"productName":productInfo.productName,
-				"companyInfoId":productInfo.companyInfo.companyInfoId,
-				"minPrice":productInfo.minPrice,
-				"maxPrice":productInfo.maxPrice
-		}
-		$http.post('/productInfo/update', input).success(function(data, status, headers, config) {
-			if (data.status == 'success') {
-				alert("success");
-				$location.url("/productInfo");				
-			} else if (data.status == 'fail') {
-				alert(data.errorMsg);
-			}
-		}).error(function(data, status, headers, config) {
-			$scope.message = "fail";
-		})
+		$rootScope.isEdit = true;
+		$location.url("/productInfo/addOrEdit");			
 	}
 	$scope.deleteProductInfo = function(productInfoId) {
 		var isConfirmed = confirm("Are you sure to delete this record ?");
@@ -72,6 +62,7 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 			$http.post('/productInfo/delete', input).success(function(data, status, headers, config) {
 				if (data.status == 'success') {
 					alert("success");
+					$rootScope.productInfo = null;
 					$location.url("/productInfo");				
 				} else if (data.status == 'fail') {
 					alert(data.errorMsg);

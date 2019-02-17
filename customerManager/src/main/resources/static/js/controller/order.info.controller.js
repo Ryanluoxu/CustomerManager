@@ -36,7 +36,7 @@ app.controller('orderInfoController', function($scope, $http, $rootScope, $locat
 	$scope.preview = function(){
 		$scope.isPreview = true;
 	}
-	$scope.addOrderInfo = function(orderInfo) {
+	$scope.addOrUpdateOrderInfo = function(orderInfo) {
 		var input = {
 				"customerInfoId":orderInfo.customerInfo.customerInfoId,
 				"productInfoId":orderInfo.productInfo.productInfoId,
@@ -45,44 +45,32 @@ app.controller('orderInfoController', function($scope, $http, $rootScope, $locat
 				"quantity":orderInfo.quantity,
 				"profit":orderInfo.profit
 		}
-		$http.post('/orderInfo/add', input).success(function(data, status, headers, config) {
+		var postPath = '/orderInfo/add';
+		if ($rootScope.isEdit) {
+			input.orderInfoId = orderInfo.orderInfoId;
+			postPath = '/orderInfo/update';
+		}
+		$http.post(postPath, input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {
 				alert("success");
+				$scope.orderInfo = null;
 				$location.url("/orderInfo");				
 			} else if (data.status == 'fail') {
 				alert(data.errorMsg);
+				$scope.isPreview = false;
 			}
 		}).error(function(data, status, headers, config) {
 			$scope.message = "fail";
 		})
 	}
 	$scope.goToOrderInfoAdd = function(){
-		$location.url("/orderInfo/add");
+		$rootScope.isEdit = false;
+		$location.url("/orderInfo/addOrEdit");
 	}
 	$scope.editOrderInfo = function(orderInfo) {
 		$rootScope.orderInfo = orderInfo;
-		$location.url("/orderInfo/edit");			
-	}
-	$scope.updateOrderInfo = function(orderInfo) {
-		var input = {
-				"orderInfoId":orderInfo.orderInfoId,
-				"customerInfoId":orderInfo.customerInfo.customerInfoId,
-				"productInfoId":orderInfo.productInfo.productInfoId,
-				"paymentMode":orderInfo.paymentMode,
-				"unitPrice":orderInfo.unitPrice,
-				"quantity":orderInfo.quantity,
-				"profit":orderInfo.profit
-		}
-		$http.post('/orderInfo/update', input).success(function(data, status, headers, config) {
-			if (data.status == 'success') {
-				alert("success");
-				$location.url("/orderInfo");				
-			} else if (data.status == 'fail') {
-				alert(data.errorMsg);
-			}
-		}).error(function(data, status, headers, config) {
-			$scope.message = "fail";
-		})
+		$rootScope.isEdit = true;
+		$location.url("/orderInfo/addOrEdit");			
 	}
 	$scope.deleteOrderInfo = function(orderInfoId) {
 		var isConfirmed = confirm("Are you sure to delete this record ?");
@@ -93,6 +81,7 @@ app.controller('orderInfoController', function($scope, $http, $rootScope, $locat
 			$http.post('/orderInfo/delete', input).success(function(data, status, headers, config) {
 				if (data.status == 'success') {
 					alert("success");
+					$rootScope.orderInfo = null;
 					$location.url("/orderInfo");				
 				} else if (data.status == 'fail') {
 					alert(data.errorMsg);

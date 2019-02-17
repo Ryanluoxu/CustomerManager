@@ -9,50 +9,48 @@ app.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'pages/home.html',
 		controller : 'mainController'
-	}).when('/customerInfo', {
-		templateUrl : 'pages/customerInfo.html',
+	})
+	
+	.when('/customerInfo', {
+		templateUrl : 'pages/customerInfo/view.html',
 		controller : 'customerInfoController'
-	}).when('/customerInfo/add', {
-		templateUrl : 'pages/customerInfo/add.html',
-		controller : 'customerInfoController'
-	}).when('/customerInfo/edit', {
-		templateUrl : 'pages/customerInfo/edit.html',
+	}).when('/customerInfo/addOrEdit', {
+		templateUrl : 'pages/customerInfo/addOrEdit.html',
 		controller : 'customerInfoController'
 	})
 	
 	.when('/orderInfo', {
-		templateUrl : 'pages/orderInfo.html',
+		templateUrl : 'pages/orderInfo/view.html',
 		controller : 'orderInfoController'
-	}).when('/orderInfo/add', {
-		templateUrl : 'pages/orderInfo/add.html',
-		controller : 'orderInfoController'
-	}).when('/orderInfo/edit', {
-		templateUrl : 'pages/orderInfo/edit.html',
+	}).when('/orderInfo/addOrEdit', {
+		templateUrl : 'pages/orderInfo/addOrEdit.html',
 		controller : 'orderInfoController'
 	})
 	
+	.when('/userInfo', {
+		templateUrl : 'pages/userInfo/view.html',
+		controller : 'userInfoController'
+	}).when('/userInfo/addOrEdit', {
+		templateUrl : 'pages/userInfo/addOrEdit.html',
+		controller : 'userInfoController'
+	})
+	
 	.when('/companyInfo', {
-		templateUrl : 'pages/companyInfo.html',
+		templateUrl : 'pages/companyInfo/view.html',
 		controller : 'companyInfoController'
-	}).when('/companyInfo/add', {
-		templateUrl : 'pages/companyInfo/add.html',
-		controller : 'companyInfoController'
-	}).when('/companyInfo/edit', {
-		templateUrl : 'pages/companyInfo/edit.html',
+	}).when('/companyInfo/addOrEdit', {
+		templateUrl : 'pages/companyInfo/addOrEdit.html',
 		controller : 'companyInfoController'
 	})
 	
 	.when('/productInfo', {
-		templateUrl : 'pages/productInfo.html',
+		templateUrl : 'pages/productInfo/view.html',
 		controller : 'productInfoController'
-	}).when('/productInfo/add', {
-		templateUrl : 'pages/productInfo/add.html',
-		controller : 'productInfoController'
-	}).when('/productInfo/edit', {
-		templateUrl : 'pages/productInfo/edit.html',
+	}).when('/productInfo/addOrEdit', {
+		templateUrl : 'pages/productInfo/addOrEdit.html',
 		controller : 'productInfoController'
 	})
-
+	
 	.otherwise({
 		redirectTo : '/'
 	});

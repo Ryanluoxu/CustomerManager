@@ -2,7 +2,6 @@
  *
  */
 app.controller('customerInfoController', function($scope, $http, $rootScope, $location) {
-
 	$scope.findAllCustomerInfo = function() {
 		$http.get("/customerInfo/findAll").success(function(data, status, headers, config) {
 			$scope.customerInfoVOs = data.data;
@@ -13,8 +12,8 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 	$scope.preview = function(){
 		$scope.isPreview = true;
 	}
-	$scope.addCustomerInfo = function(customerInfo) {
-		var customerInfoInput = {
+	$scope.addOrUpdateCustomerInfo = function(customerInfo) {
+		var input = {
 				"customerName":$scope.customerInfo.customerName,
 				"function":$scope.customerInfo.function,
 				"companyName":$scope.customerInfo.companyName,
@@ -25,48 +24,33 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 				"contactFax":$scope.customerInfo.contactFax,
 				"address":$scope.customerInfo.address
 		}
-		$http.post('/customerInfo/add', customerInfoInput).success(function(data, status, headers, config) {
+		var postPath = '/customerInfo/add';
+		if ($rootScope.isEdit) {
+			input.customerInfoId = customerInfo.customerInfoId;
+			postPath = '/customerInfo/update';
+		}
+		$http.post(postPath, input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {
 				alert("success");
+				$scope.customerInfo = null;
 				$location.url("/customerInfo");
 			} else if (data.status == 'fail') {
 				alert(data.errorMsg);
+				$scope.isPreview = false;
 			}
 		}).error(function(data, status, headers, config) {
 			$scope.message = "fail";
 		})
 	}
-
+	$scope.goToCustomerInfoAdd = function(){
+		$rootScope.isEdit = false;
+		$location.url("/customerInfo/addOrEdit");
+	}
 	$scope.editCustomerInfo = function(customerInfoVO) {
 		$rootScope.customerInfo = customerInfoVO;
-		$location.url("/customerInfo/edit");
+		$rootScope.isEdit = true;
+		$location.url("/customerInfo/addOrEdit");
 	}
-
-	$scope.updateCustomerInfo = function(customerInfo) {
-		var input = {
-				"customerInfoId":customerInfo.customerInfoId,
-				"customerName":customerInfo.customerName,
-				"function":customerInfo.function,
-				"companyName":customerInfo.companyName,
-				"country":customerInfo.country,
-				"email":customerInfo.email,
-				"contactMobile":customerInfo.contactMobile,
-				"contactOffice":customerInfo.contactOffice,
-				"contactFax":customerInfo.contactFax,
-				"address":customerInfo.address
-		}
-		$http.post('/customerInfo/update', input).success(function(data, status, headers, config) {
-			if (data.status == 'success') {
-				alert("success");
-				$location.url("/customerInfo");
-			} else if (data.status == 'fail') {
-				alert(data.errorMsg);
-			}
-		}).error(function(data, status, headers, config) {
-			$scope.message = "fail";
-		})
-	}
-
 	$scope.deleteCustomerInfo = function(customerInfoId) {
 		var isConfirmed = confirm("Are you sure to delete this record ?");
 		if (isConfirmed) {
@@ -76,6 +60,7 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 			$http.post('/customerInfo/delete', input).success(function(data, status, headers, config) {
 				if (data.status == 'success') {
 					alert("success");
+					$rootScope.customerInfo = null;
 					$location.url("/customerInfo");
 				} else if (data.status == 'fail') {
 					alert(data.errorMsg);
@@ -84,10 +69,6 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 				$scope.message = "fail";
 			})
 		}
-	}
-
-	$scope.goToCustomerInfoAdd = function(){
-		$location.url("/customerInfo/add");
 	}
 	$scope.showOrderInfo = function(customerInfoVO){
 		$rootScope.seletedCustomerInfo = customerInfoVO;

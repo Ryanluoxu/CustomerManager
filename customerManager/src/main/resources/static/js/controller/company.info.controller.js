@@ -12,28 +12,37 @@ app.controller('companyInfoController', function($scope, $http, $rootScope, $loc
 	$scope.preview = function(){
 		$scope.isPreview = true;
 	}
-	$scope.addCompanyInfo = function(companyInfo) {
+	$scope.addOrUpdateCompanyInfo = function(companyInfo) {
 		var input = {
 				"companyName":$scope.companyInfo.companyName,
 				"country":$scope.companyInfo.country
 		}
-		$http.post('/companyInfo/add', input).success(function(data, status, headers, config) {
+		var postPath = '/companyInfo/add';
+		if ($rootScope.isEdit) {
+			input.companyInfoId = companyInfo.companyInfoId;
+			postPath = '/companyInfo/update';
+		}
+		$http.post(postPath, input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {
 				alert("success");
+				$scope.companyInfo = null;
 				$location.url("/companyInfo");				
 			} else if (data.status == 'fail') {
 				alert(data.errorMsg);
+				$scope.isPreview = false;
 			}
 		}).error(function(data, status, headers, config) {
 			$scope.message = "fail";
 		})
 	}
 	$scope.goToCompanyInfoAdd = function(){
-		$location.url("/companyInfo/add");
+		$rootScope.isEdit = false;
+		$location.url("/companyInfo/addOrEdit");
 	}
 	$scope.editCompanyInfo = function(companyInfoVO) {
 		$rootScope.companyInfo = companyInfoVO;
-		$location.url("/companyInfo/edit");			
+		$rootScope.isEdit = true;
+		$location.url("/companyInfo/addOrEdit");			
 	}
 	$scope.updateCompanyInfo = function(companyInfo) {
 		var input = {
@@ -47,6 +56,7 @@ app.controller('companyInfoController', function($scope, $http, $rootScope, $loc
 				$location.url("/companyInfo");				
 			} else if (data.status == 'fail') {
 				alert(data.errorMsg);
+				$scope.isPreview = false;
 			}
 		}).error(function(data, status, headers, config) {
 			$scope.message = "fail";
@@ -61,6 +71,7 @@ app.controller('companyInfoController', function($scope, $http, $rootScope, $loc
 			$http.post('/companyInfo/delete', input).success(function(data, status, headers, config) {
 				if (data.status == 'success') {
 					alert("success");
+					$rootScope.companyInfo = null;
 					$location.url("/companyInfo");				
 				} else if (data.status == 'fail') {
 					alert(data.errorMsg);

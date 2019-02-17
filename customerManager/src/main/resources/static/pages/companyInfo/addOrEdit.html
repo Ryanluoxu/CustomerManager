@@ -1,7 +1,8 @@
 <div class="jumbotron text-center">
-	<h2>Edit Company</h2>
+	<h2 ng-show="!isEdit">Add Company</h2>
+	<h2 ng-show="isEdit">Edit Company</h2>
 	<br>
-	<!-- edit TABLE -->
+	<!-- add TABLE -->
 	<div class="container" ng-show="!isPreview">
 		<form>
 			<div class="form-group row">
@@ -16,8 +17,8 @@
 				<input type="text" class="form-control" ng-model="companyInfo.country">
 				</div>
 			</div>
-			<button ng-click="preview()" class="btn btn-default">Update</button>
-			<button ng-click="deleteCompanyInfo(companyInfo.companyInfoId)" class="btn btn-default">Delete</button>
+			<button ng-click="preview()" class="btn btn-default">Next</button>
+			<button ng-click="deleteCompanyInfo(companyInfo.companyInfoId)" class="btn btn-default" ng-show="isEdit">Delete</button>
 		</form>
 	</div>
 	
@@ -33,12 +34,8 @@
 				<label class="col-sm-2 col-form-label">Country</label>
 				<div class="col-sm-8">{{companyInfo.country}}</div>
 			</div>
-			<button ng-click="updateCompanyInfo(companyInfo)" class="btn btn-default">Submit</button>
+			<button ng-click="addOrUpdateCompanyInfo(companyInfo)" class="btn btn-warning">Submit</button>
 		</form>
 	</div>
-
-
-
-
 
 </div>
