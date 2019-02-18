@@ -3,7 +3,7 @@
  */
 app.controller('userInfoController', function($scope, $http, $rootScope, $location) {
 	$scope.findAllUserInfo = function() {
-		$http.get("/userInfo/findAll").success(function(data, status, headers, config) {
+		$http.get("/rest/userInfo/findAll").success(function(data, status, headers, config) {
 			$scope.userInfoVOs = data.data;
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
@@ -22,10 +22,10 @@ app.controller('userInfoController', function($scope, $http, $rootScope, $locati
 				"userName":userInfo.userName,
 				"password":userInfo.password
 		}
-		var postPath = '/userInfo/add';
+		var postPath = '/rest/userInfo/add';
 		if ($rootScope.isEdit) {
 			input.userInfoId = userInfo.userInfoId
-			postPath = '/userInfo/update';
+			postPath = '/rest/userInfo/update';
 		}
 		$http.post(postPath, input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {
@@ -55,7 +55,7 @@ app.controller('userInfoController', function($scope, $http, $rootScope, $locati
 			var input = {
 					"userInfoId":userInfoId
 			}
-			$http.post('/userInfo/delete', input).success(function(data, status, headers, config) {
+			$http.post('/rest/userInfo/delete', input).success(function(data, status, headers, config) {
 				if (data.status == 'success') {
 					alert("success");
 					$rootScope.userInfo = null;

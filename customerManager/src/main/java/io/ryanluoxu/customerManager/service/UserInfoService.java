@@ -7,4 +7,5 @@ import io.ryanluoxu.customerManager.bean.entity.UserInfo;
 public interface UserInfoService extends BaseService<UserInfo, Long>{
 
 	List<UserInfo> findByUserName(String userName);
+
 }

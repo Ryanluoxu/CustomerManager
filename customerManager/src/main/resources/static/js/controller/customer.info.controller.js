@@ -3,7 +3,7 @@
  */
 app.controller('customerInfoController', function($scope, $http, $rootScope, $location) {
 	$scope.findAllCustomerInfo = function() {
-		$http.get("/customerInfo/findAll").success(function(data, status, headers, config) {
+		$http.get("/rest/customerInfo/findAll").success(function(data, status, headers, config) {
 			$scope.customerInfoVOs = data.data;
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
@@ -24,10 +24,10 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 				"contactFax":$scope.customerInfo.contactFax,
 				"address":$scope.customerInfo.address
 		}
-		var postPath = '/customerInfo/add';
+		var postPath = '/rest/customerInfo/add';
 		if ($rootScope.isEdit) {
 			input.customerInfoId = customerInfo.customerInfoId;
-			postPath = '/customerInfo/update';
+			postPath = '/rest/customerInfo/update';
 		}
 		$http.post(postPath, input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {
@@ -57,7 +57,7 @@ app.controller('customerInfoController', function($scope, $http, $rootScope, $lo
 			var input = {
 					"customerInfoId":customerInfoId
 			}
-			$http.post('/customerInfo/delete', input).success(function(data, status, headers, config) {
+			$http.post('/rest/customerInfo/delete', input).success(function(data, status, headers, config) {
 				if (data.status == 'success') {
 					alert("success");
 					$rootScope.customerInfo = null;

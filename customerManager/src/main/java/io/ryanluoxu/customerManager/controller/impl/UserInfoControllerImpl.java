@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.base.exception.CommonException;
+import io.ryanluoxu.customerManager.base.util.DateTimeUtil;
 import io.ryanluoxu.customerManager.bean.entity.UserInfo;
 import io.ryanluoxu.customerManager.bean.input.UserInfoInput;
 import io.ryanluoxu.customerManager.bean.vo.UserInfoVO;
@@ -22,6 +23,7 @@ public class UserInfoControllerImpl extends BaseControllerImpl<UserInfo, UserInf
 		List<UserInfo> userInfos = userInfoService.findActive();
 		for (UserInfo userInfo : userInfos) {
 			UserInfoVO userInfoVO = convertToVO(userInfo);
+			userInfoVO.setCreatedDate(DateTimeUtil.getString(userInfo.getCreatedDate()));
 			userInfoVOs.add(userInfoVO);
 		}
 		return userInfoVOs;

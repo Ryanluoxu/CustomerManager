@@ -18,7 +18,7 @@ import io.ryanluoxu.customerManager.bean.vo.ResponseModel;
 import io.ryanluoxu.customerManager.controller.CustomerInfoController;
 
 @RestController
-@RequestMapping("/customerInfo")
+@RequestMapping("/rest/customerInfo")
 public class CustomerInfoRestController {
 
 	@Autowired

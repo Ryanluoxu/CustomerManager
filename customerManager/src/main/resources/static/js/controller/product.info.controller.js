@@ -3,14 +3,14 @@
  */
 app.controller('productInfoController', function($scope, $http, $rootScope, $location) {
 	$scope.findAllProductInfo = function() {
-		$http.get("/productInfo/findAll").success(function(data, status, headers, config) {
+		$http.get("/rest/productInfo/findAll").success(function(data, status, headers, config) {
 			$scope.productInfoVOs = data.data;
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
 		})
 	}
 	$scope.findAllCompanyInfo = function() {
-		$http.get("/companyInfo/findAll").success(function(data, status, headers, config) {
+		$http.get("/rest/companyInfo/findAll").success(function(data, status, headers, config) {
 			$scope.companyInfoVOs = data.data;
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
@@ -26,10 +26,10 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 				"minPrice":productInfo.minPrice,
 				"maxPrice":productInfo.maxPrice
 		}
-		var postPath = '/productInfo/add';
+		var postPath = '/rest/productInfo/add';
 		if ($rootScope.isEdit) {
 			input.productInfoId = productInfo.productInfoId;
-			postPath = '/productInfo/update';
+			postPath = '/rest/productInfo/update';
 		}
 		$http.post(postPath, input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {
@@ -59,7 +59,7 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 			var input = {
 					"productInfoId":productInfoId
 			}
-			$http.post('/productInfo/delete', input).success(function(data, status, headers, config) {
+			$http.post('/rest/productInfo/delete', input).success(function(data, status, headers, config) {
 				if (data.status == 'success') {
 					alert("success");
 					$rootScope.productInfo = null;

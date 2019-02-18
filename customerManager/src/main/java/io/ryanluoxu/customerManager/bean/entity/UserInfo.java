@@ -30,6 +30,15 @@ public class UserInfo implements Serializable{
 	private String status;
 	@Column(name="created_date")
 	private Date createdDate;
+	@Column(name="role")
+	private String role;
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public Long getUserInfoId() {
 		return userInfoId;
 	}

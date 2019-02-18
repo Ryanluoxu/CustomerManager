@@ -18,7 +18,7 @@ import io.ryanluoxu.customerManager.bean.vo.UserInfoVO;
 import io.ryanluoxu.customerManager.controller.UserInfoController;
 
 @RestController
-@RequestMapping("/userInfo")
+@RequestMapping("/rest/userInfo")
 public class UserInfoRestController {
 
 	@Autowired

@@ -3,7 +3,7 @@
  */
 app.controller('orderInfoController', function($scope, $http, $rootScope, $location) {
 	$scope.findAllOrderInfo = function() {
-		$http.get("/orderInfo/findAll").success(function(data, status, headers, config) {
+		$http.get("/rest/orderInfo/findAll").success(function(data, status, headers, config) {
 			$scope.orderInfoVOs = data.data;
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
@@ -13,21 +13,21 @@ app.controller('orderInfoController', function($scope, $http, $rootScope, $locat
 		var input = {
 				"customerInfoId":customerInfoId,
 		}
-		$http.post("/orderInfo/findByCustomerInfoId", input).success(function(data, status, headers, config) {
+		$http.post("/rest/orderInfo/findByCustomerInfoId", input).success(function(data, status, headers, config) {
 			$scope.orderInfoVOs = data.data;
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
 		})
 	}
 	$scope.findAllProductInfo = function() {
-		$http.get("/productInfo/findAll").success(function(data, status, headers, config) {
+		$http.get("/rest/productInfo/findAll").success(function(data, status, headers, config) {
 			$scope.productInfoVOs = data.data;
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
 		})
 	}
 	$scope.findAllCustomerInfo = function() {
-		$http.get("/customerInfo/findAll").success(function(data, status, headers, config) {
+		$http.get("/rest/customerInfo/findAll").success(function(data, status, headers, config) {
 			$scope.customerInfoVOs = data.data;
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
@@ -45,10 +45,10 @@ app.controller('orderInfoController', function($scope, $http, $rootScope, $locat
 				"quantity":orderInfo.quantity,
 				"profit":orderInfo.profit
 		}
-		var postPath = '/orderInfo/add';
+		var postPath = '/rest/orderInfo/add';
 		if ($rootScope.isEdit) {
 			input.orderInfoId = orderInfo.orderInfoId;
-			postPath = '/orderInfo/update';
+			postPath = '/rest/orderInfo/update';
 		}
 		$http.post(postPath, input).success(function(data, status, headers, config) {
 			if (data.status == 'success') {
@@ -78,7 +78,7 @@ app.controller('orderInfoController', function($scope, $http, $rootScope, $locat
 			var input = {
 					"orderInfoId":orderInfoId
 			}
-			$http.post('/orderInfo/delete', input).success(function(data, status, headers, config) {
+			$http.post('/rest/orderInfo/delete', input).success(function(data, status, headers, config) {
 				if (data.status == 'success') {
 					alert("success");
 					$rootScope.orderInfo = null;

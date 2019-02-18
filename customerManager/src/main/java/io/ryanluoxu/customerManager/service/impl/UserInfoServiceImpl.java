@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.ryanluoxu.customerManager.base.constant.RoleConstant;
 import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.bean.entity.UserInfo;
 import io.ryanluoxu.customerManager.dao.UserInfoDao;
@@ -23,6 +24,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public UserInfo add(UserInfo userInfo) {
 		userInfo.setCreatedDate(new Date());
 		userInfo.setStatus(StatusConstant.ACTIVE);
+		userInfo.setRole(RoleConstant.USER);
 		return userInfoDao.add(userInfo);
 	}
 

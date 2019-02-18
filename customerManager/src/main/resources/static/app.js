@@ -10,44 +10,57 @@ app.config(function($routeProvider) {
 		templateUrl : 'pages/home.html',
 		controller : 'mainController'
 	})
+
+	.when('/login', {
+		templateUrl : 'pages/login.html',
+		controller : 'loginController'
+	})
+	.when('/admin', {
+		templateUrl : 'pages/admin/admin.html',
+		controller : 'adminController'
+	})
+	.when('/user', {
+		templateUrl : 'pages/user/user.html',
+		controller : 'userController'
+	})
+		
+	.when('/userInfo', {
+		templateUrl : 'pages/admin/userInfo/view.html',
+		controller : 'userInfoController'
+	}).when('/userInfo/addOrEdit', {
+		templateUrl : 'pages/admin/userInfo/addOrEdit.html',
+		controller : 'userInfoController'
+	})
 	
 	.when('/customerInfo', {
-		templateUrl : 'pages/customerInfo/view.html',
+		templateUrl : 'pages/user/customerInfo/view.html',
 		controller : 'customerInfoController'
 	}).when('/customerInfo/addOrEdit', {
-		templateUrl : 'pages/customerInfo/addOrEdit.html',
+		templateUrl : 'pages/user/customerInfo/addOrEdit.html',
 		controller : 'customerInfoController'
 	})
 	
 	.when('/orderInfo', {
-		templateUrl : 'pages/orderInfo/view.html',
+		templateUrl : 'pages/user/orderInfo/view.html',
 		controller : 'orderInfoController'
 	}).when('/orderInfo/addOrEdit', {
-		templateUrl : 'pages/orderInfo/addOrEdit.html',
+		templateUrl : 'pages/user/orderInfo/addOrEdit.html',
 		controller : 'orderInfoController'
-	})
-	
-	.when('/userInfo', {
-		templateUrl : 'pages/userInfo/view.html',
-		controller : 'userInfoController'
-	}).when('/userInfo/addOrEdit', {
-		templateUrl : 'pages/userInfo/addOrEdit.html',
-		controller : 'userInfoController'
 	})
 	
 	.when('/companyInfo', {
-		templateUrl : 'pages/companyInfo/view.html',
+		templateUrl : 'pages/user/companyInfo/view.html',
 		controller : 'companyInfoController'
 	}).when('/companyInfo/addOrEdit', {
-		templateUrl : 'pages/companyInfo/addOrEdit.html',
+		templateUrl : 'pages/user/companyInfo/addOrEdit.html',
 		controller : 'companyInfoController'
 	})
 	
 	.when('/productInfo', {
-		templateUrl : 'pages/productInfo/view.html',
+		templateUrl : 'pages/user/productInfo/view.html',
 		controller : 'productInfoController'
 	}).when('/productInfo/addOrEdit', {
-		templateUrl : 'pages/productInfo/addOrEdit.html',
+		templateUrl : 'pages/user/productInfo/addOrEdit.html',
 		controller : 'productInfoController'
 	})
 	
