@@ -3,6 +3,7 @@ package io.ryanluoxu.customerManager.restcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import io.ryanluoxu.customerManager.controller.ProductInfoController;
 
 @RestController
 @RequestMapping("/rest/productInfo")
+@Secured("ROLE_USER")
 public class ProductInfoRestController {
 
 	@Autowired

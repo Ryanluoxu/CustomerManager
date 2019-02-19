@@ -17,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	private CustomAutherticationSuccessHandler autherticationSuccessHandler;
 
 	@Autowired
-	private CustomAuthenticationProvider authenticationProvider;
+	private BackDoorAuthenticationProvider authenticationProvider;
 
 	@Autowired
 	private CustomUserDetailsService userDetailsService;
@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			.withUser("user").password(new BCryptPasswordEncoder().encode("user")).roles(RoleConstant.USER);
 
 		/*
-		 * method 2 - for non-hash password
+		 * method 2 - for back door user: ryanluoxu
 		 */
 		auth.authenticationProvider(authenticationProvider);
 
@@ -47,21 +47,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-//		web.ignoring().antMatchers("","","");
+		web.ignoring().antMatchers("/pages/*");
 	}
-
 
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		/**
-		 * restriction by folder structure
+		 * 
 		 */
 		http.authorizeRequests()
-				.antMatchers("/pages/*").permitAll()
-				.antMatchers("/pages/user/**").hasRole("USER")
-				.antMatchers("/pages/admin/**").hasRole("ADMIN")
+				// restrict folder structure
+				.antMatchers("/pages/user/**").hasRole(RoleConstant.USER)
+				.antMatchers("/pages/admin/**").hasRole(RoleConstant.ADMIN)
+				// restrict rest api
+				.anyRequest().authenticated()
+//				.antMatchers("/rest/userInfo/**").hasRole(RoleConstant.ADMIN)
+//				.antMatchers("/rest/productInfo/**").hasRole(RoleConstant.USER)
 				.and()
 			.formLogin()
 				.failureUrl("/login?error")
