@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.base.exception.CommonException;
+import io.ryanluoxu.customerManager.base.util.AppEncoder;
 import io.ryanluoxu.customerManager.base.util.DateTimeUtil;
 import io.ryanluoxu.customerManager.bean.entity.UserInfo;
 import io.ryanluoxu.customerManager.bean.input.UserInfoInput;
@@ -31,15 +32,21 @@ public class UserInfoControllerImpl extends BaseControllerImpl<UserInfo, UserInf
 
 	@Override
 	public UserInfoVO add(UserInfoInput userInfoInput) {
+		passwordEncode(userInfoInput);
 		UserInfoVO userInfoVO = convertToVO(userInfoService.add(convertToBean(userInfoInput)));
 		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, userInfoVO.toString());
 		return userInfoVO;
+	}
+
+	private void passwordEncode(UserInfoInput userInfoInput) {
+		userInfoInput.setPassword(AppEncoder.bCryptPasswordEncode(userInfoInput.getPassword()));
 	}
 
 	@Override
 	public UserInfoVO update(UserInfoInput userInfoInput) {
 		UserInfo userInfo = userInfoService.getById(userInfoInput.getUserInfoId());
 		userInfo.setUserName(userInfoInput.getUserName());
+		passwordEncode(userInfoInput);
 		UserInfoVO userInfoVO = convertToVO(userInfoService.update(userInfo));
 		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_UPDATE, userInfoVO.toString());
 		return userInfoVO;

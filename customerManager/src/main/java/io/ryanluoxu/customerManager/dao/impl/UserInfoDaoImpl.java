@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.bean.entity.UserInfo;
@@ -47,6 +48,22 @@ public class UserInfoDaoImpl extends GenericDaoImpl<UserInfo, Long> implements U
 				));	
 		
 		return getSession().createQuery(criteriaQuery).getResultList();				
+	}
+
+	@Override
+	public UserInfo get(String userName, String status) {
+		CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
+		CriteriaQuery<UserInfo> criteriaQuery = criteriaBuilder.createQuery(UserInfo.class);
+		Root<UserInfo> root = criteriaQuery.from(UserInfo.class);
+		criteriaQuery.select(root);
+
+		criteriaQuery.where(
+				criteriaBuilder.and(
+						criteriaBuilder.equal(root.get(USER_NAME), userName),
+						criteriaBuilder.equal(root.get(STATUS), status)
+				));		
+		List<UserInfo> userInfos = getSession().createQuery(criteriaQuery).getResultList();
+		return CollectionUtils.isEmpty(userInfos)? null : userInfos.get(0);
 	}
 
 

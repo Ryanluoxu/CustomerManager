@@ -14,24 +14,25 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Service;
 
-import io.ryanluoxu.customerManager.base.constant.RoleConstant;
+import io.ryanluoxu.customerManager.base.constant.AuthorityConstant;
 
+@Service
 public class CustomAutherticationSuccessHandler implements AuthenticationSuccessHandler {
-	
+
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, 
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		
 		String targetUrl = getTargetUrl(authentication);
-		
+		/*
+		 * Response has already been committed. Unable to redirect
+		 */
 		if (response.isCommitted()) {
-			// Response has already been committed. Unable to redirect
 			return;
 		}
-		
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 		clearAuthenticationAttributes(request);
 	}
@@ -50,10 +51,12 @@ public class CustomAutherticationSuccessHandler implements AuthenticationSuccess
 		 */
 		Collection<? extends GrantedAuthority> grantedAuthorities = authentication.getAuthorities();
 		for (GrantedAuthority grantedAuthority : grantedAuthorities) {
-			if (grantedAuthority.getAuthority().equals(RoleConstant.ADMIN)) {
-				return "/pages/admin/admin.html";
-			} else if (grantedAuthority.getAuthority().equals(RoleConstant.USER)) {
-				return "/user";
+			if (grantedAuthority.getAuthority().equals(AuthorityConstant.ADMIN)) {
+				System.out.println("=== grantedAuthority : " + grantedAuthority.getAuthority());
+				return "/#/admin";
+			} else if (grantedAuthority.getAuthority().equals(AuthorityConstant.USER)) {
+				System.out.println("=== grantedAuthority : " + grantedAuthority.getAuthority());
+				return "/#/user";
 			}
 		}
 		return null;
@@ -66,6 +69,6 @@ public class CustomAutherticationSuccessHandler implements AuthenticationSuccess
 	public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
 		this.redirectStrategy = redirectStrategy;
 	}
-	
+
 
 }
