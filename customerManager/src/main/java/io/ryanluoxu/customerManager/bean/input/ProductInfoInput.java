@@ -2,7 +2,9 @@ package io.ryanluoxu.customerManager.bean.input;
 
 import java.util.Date;
 
-public class ProductInfoInput {
+import io.ryanluoxu.customerManager.bean.BaseBean;
+
+public class ProductInfoInput extends BaseBean{
 
 	private Long productInfoId;
 	private Long companyInfoId;

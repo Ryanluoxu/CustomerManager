@@ -11,10 +11,6 @@ app.config(function($routeProvider) {
 		controller : 'mainController'
 	})
 
-	.when('/login', {
-		templateUrl : 'pages/login.html',
-		controller : 'loginController'
-	})
 	.when('/admin', {
 		templateUrl : 'pages/admin/admin.html',
 		controller : 'adminController'

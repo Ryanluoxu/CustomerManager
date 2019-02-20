@@ -15,7 +15,8 @@ app.controller('companyInfoController', function($scope, $http, $rootScope, $loc
 	$scope.addOrUpdateCompanyInfo = function(companyInfo) {
 		var input = {
 				"companyName":$scope.companyInfo.companyName,
-				"country":$scope.companyInfo.country
+				"country":$scope.companyInfo.country,
+				"loginUserName":$rootScope.loginUser.userName
 		}
 		var postPath = '/rest/companyInfo/add';
 		if ($rootScope.isEdit) {
@@ -48,7 +49,8 @@ app.controller('companyInfoController', function($scope, $http, $rootScope, $loc
 		var isConfirmed = confirm("Are you sure to delete this record ?");
 		if (isConfirmed) {
 			var input = {
-					"companyInfoId":companyInfoId
+					"companyInfoId":companyInfoId,
+					"loginUserName":$rootScope.loginUser.userName
 			}
 			$http.post('/rest/companyInfo/delete', input).success(function(data, status, headers, config) {
 				if (data.status == 'success') {

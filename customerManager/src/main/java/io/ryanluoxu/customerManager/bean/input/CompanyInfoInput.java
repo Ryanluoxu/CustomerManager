@@ -1,14 +1,13 @@
 package io.ryanluoxu.customerManager.bean.input;
 
-import java.util.Date;
+import io.ryanluoxu.customerManager.bean.BaseBean;
 
-public class CompanyInfoInput{
+public class CompanyInfoInput extends BaseBean{
 
 	private Long companyInfoId;
 	private String companyName;
 	private String country;
 	private String status;
-	private Date createdDate;
 	public Long getCompanyInfoId() {
 		return companyInfoId;
 	}
@@ -33,12 +32,4 @@ public class CompanyInfoInput{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	
 }

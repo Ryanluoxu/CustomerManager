@@ -1,6 +1,7 @@
 package io.ryanluoxu.customerManager.controller.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.base.constant.CompanyInfoConstant;
+import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.base.exception.CommonException;
 import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
 import io.ryanluoxu.customerManager.bean.input.CompanyInfoInput;
@@ -34,7 +36,11 @@ public class CompanyInfoControllerImpl extends BaseControllerImpl<CompanyInfo, C
 
 	@Override
 	public CompanyInfoVO add(CompanyInfoInput companyInfoInput) {
-		CompanyInfoVO companyInfoVO = convertToVO(companyInfoService.add(convertToBean(companyInfoInput)));
+		CompanyInfo companyInfo = convertToBean(companyInfoInput);
+		companyInfo.setCreatedBy(companyInfoInput.getLoginUserName());
+		companyInfo.setCreatedDate(new Date());
+		companyInfo.setStatus(StatusConstant.ACTIVE);
+		CompanyInfoVO companyInfoVO = convertToVO(companyInfoService.add(companyInfo));
 		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, companyInfoVO.toString());
 		return companyInfoVO;
 	}
@@ -44,6 +50,8 @@ public class CompanyInfoControllerImpl extends BaseControllerImpl<CompanyInfo, C
 		CompanyInfo companyInfo = companyInfoService.getById(companyInfoInput.getCompanyInfoId());
 		companyInfo.setCompanyName(companyInfoInput.getCompanyName());
 		companyInfo.setCountry(companyInfoInput.getCountry());
+		companyInfo.setUpdatedBy(companyInfoInput.getLoginUserName());
+		companyInfo.setUpdatedDate(new Date());
 		CompanyInfoVO companyInfoVO = convertToVO(companyInfoService.update(companyInfo));
 		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_UPDATE, companyInfoVO.toString());
 		return companyInfoVO;
@@ -53,6 +61,8 @@ public class CompanyInfoControllerImpl extends BaseControllerImpl<CompanyInfo, C
 	public CompanyInfoVO delete(CompanyInfoInput companyInfoInput) {
 		CompanyInfo companyInfo = companyInfoService.getById(companyInfoInput.getCompanyInfoId());
 		companyInfo.setStatus(CompanyInfoConstant.STATUS_INACTIVE);
+		companyInfo.setUpdatedBy(companyInfoInput.getLoginUserName());
+		companyInfo.setUpdatedDate(new Date());
 		CompanyInfoVO companyInfoVO = convertToVO(companyInfoService.update(companyInfo));
 		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_DELETE, companyInfoVO.toString());
 		deleteUnderlyingProductInfo(companyInfoVO);

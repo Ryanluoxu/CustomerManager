@@ -29,6 +29,15 @@ public class AuditTrail implements Serializable{
 	private String actionType;
 	@Column(name="created_date")
 	private Date createdDate;
+	@Column(name="user")
+	private String user;
+	
+	public String getUserName() {
+		return user;
+	}
+	public void setUserName(String userName) {
+		this.user = userName;
+	}
 	public Long getAuditTrailId() {
 		return auditTrailId;
 	}

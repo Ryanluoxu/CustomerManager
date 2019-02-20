@@ -1,6 +1,8 @@
 package io.ryanluoxu.customerManager.bean.input;
 
-public class CustomerInfoInput {
+import io.ryanluoxu.customerManager.bean.BaseBean;
+
+public class CustomerInfoInput extends BaseBean{
 	private Long customerInfoId;
 	private String customerName;
 	private String function;
@@ -11,6 +13,7 @@ public class CustomerInfoInput {
 	private String contactOffice;
 	private String contactFax;
 	private String address;
+	
 	public Long getCustomerInfoId() {
 		return customerInfoId;
 	}

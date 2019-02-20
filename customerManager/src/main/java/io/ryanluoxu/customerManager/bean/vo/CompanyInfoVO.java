@@ -1,14 +1,14 @@
 package io.ryanluoxu.customerManager.bean.vo;
 
-import java.util.Date;
+import io.ryanluoxu.customerManager.bean.BaseBean;
 
-public class CompanyInfoVO{
+public class CompanyInfoVO extends BaseBean{
 
 	private Long companyInfoId;
 	private String companyName;
 	private String country;
 	private String status;
-	private Date createdDate;
+	
 	public Long getCompanyInfoId() {
 		return companyInfoId;
 	}
@@ -33,12 +33,7 @@ public class CompanyInfoVO{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
+
 	@Override
 	public String toString() {
 		return "CompanyInfoVO [companyInfoId=" + companyInfoId + ", companyName=" + companyName + ", country=" + country

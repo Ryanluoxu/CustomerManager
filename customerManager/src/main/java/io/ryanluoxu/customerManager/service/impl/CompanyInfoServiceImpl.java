@@ -1,13 +1,11 @@
 package io.ryanluoxu.customerManager.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.ryanluoxu.customerManager.base.constant.CompanyInfoConstant;
 import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
 import io.ryanluoxu.customerManager.dao.CompanyInfoDao;
 import io.ryanluoxu.customerManager.service.CompanyInfoService;
@@ -21,8 +19,6 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
 	@Override
 	public CompanyInfo add(CompanyInfo companyInfo) {
-		companyInfo.setCreatedDate(new Date());
-		companyInfo.setStatus(CompanyInfoConstant.STATUS_ACTIVE);
 		return companyInfoDao.add(companyInfo);
 	}
 

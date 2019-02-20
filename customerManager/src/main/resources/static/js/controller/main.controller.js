@@ -2,7 +2,7 @@
  *
  */
 
-app.controller('mainController', function($scope, $http, $location, $rootScope) {
+app.controller('mainController', function($rootScope, $scope, $http, $location, $rootScope) {
 
 	$scope.goHome = function() {
 		$location.url("/")
@@ -17,5 +17,14 @@ app.controller('mainController', function($scope, $http, $location, $rootScope) 
 		$location.url("/admin")
 	}
 	
-	
+	var getCredential = function(){
+		$http.get("/getCredential").success(function(data, status, headers, config) {
+			$rootScope.loginUser = data.data;
+		}).error(function(data, status, headers, config) {
+			$scope.message = status;
+		})
+	}
+
+	getCredential();
+
 });

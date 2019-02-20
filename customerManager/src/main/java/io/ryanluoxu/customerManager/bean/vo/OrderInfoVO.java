@@ -1,6 +1,8 @@
 package io.ryanluoxu.customerManager.bean.vo;
 
-public class OrderInfoVO {
+import io.ryanluoxu.customerManager.bean.BaseBean;
+
+public class OrderInfoVO extends BaseBean{
 	private Long orderInfoId;
 	private Long customerInfoId;
 	private String customerName;
@@ -11,7 +13,6 @@ public class OrderInfoVO {
 	private double quantity;
 	private double profit;
 	private String status;
-	
 	public String getStatus() {
 		return status;
 	}

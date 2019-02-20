@@ -27,11 +27,20 @@
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/">Customer Manager</a>
 				</div>
+				
+				<div class="nav navbar-nav navbar-center">
+					<a href="/#/admin" ng-show="loginUser.role=='ADMIN'">
+						<button class="btn btn-info">Admin Office</button>
+					</a>
+					<a href="/#/user" ng-show="loginUser.role=='USER'">
+						<button class="btn btn-info">User Office</button>
+					</a>
+				</div>
 
-				<div class="nav navbar-nav navbar-right">
-				<a href="/logout">
-					<button class="btn btn-default">Logout</button>
-				</a>
+				<div class="nav navbar-nav navbar-right" ng-show="loginUser.role!='ANONYMOUS'">
+					<a href="/logout">
+						<button class="btn btn-warning">Logout</button>
+					</a>
 				</div>
 
 			</div>
@@ -46,12 +55,11 @@
 
 	<!-- FOOTER -->
 	<footer class = "container">
-		<small>&copy; Copyright 2019, <a href="http://ryanluoxu.github.io" target="_blank">RyanLuoXu</a></small>
+		<small>&copy; Copyright 2019, <a href="http://ryanluoxu.github.io" target="_blank">RyanLuoXu</a>. All Rights Reserved.</small>
 	</footer>
 
 	<script src="app.js"></script>
 	<script src="js/controller/main.controller.js"></script>
-	<script src="js/controller/login.controller.js"></script>
 	<script src="js/controller/user.controller.js"></script>
 	<script src="js/controller/admin.controller.js"></script>
 	<script src="js/controller/customer.info.controller.js"></script>

@@ -1,15 +1,14 @@
 package io.ryanluoxu.customerManager.bean.vo;
 
-import java.util.Date;
+import io.ryanluoxu.customerManager.bean.BaseBean;
 
-public class ProductInfoVO {
+public class ProductInfoVO extends BaseBean {
 
 	private Long productInfoId;
 	private Long companyInfoId;
 	private String companyName;
 	private String productName;
 	private String status;
-	private Date createdDate;
 	private double minPrice;
 	private double maxPrice;
 	
@@ -54,12 +53,6 @@ public class ProductInfoVO {
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
 	}
 	@Override
 	public String toString() {

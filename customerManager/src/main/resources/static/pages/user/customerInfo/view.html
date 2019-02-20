@@ -30,7 +30,7 @@
 				<tbody class="table-light">
 					<tr ng-repeat="customerInfoVO in customerInfoVOs | filter : searchText">
 						<td scope="row">{{customerInfoVO.customerInfoId}}</td>
-                        <td><button class="btn btn-default" ng-click="showOrderInfo(customerInfoVO)">{{customerInfoVO.customerName}}</button></td>
+                        <td><button class="btn btn-secondary" ng-click="showOrderInfo(customerInfoVO)">{{customerInfoVO.customerName}}</button></td>
                         <td>{{customerInfoVO.companyName}}</td>
                         <td>{{customerInfoVO.function}}</td>
                         <td>{{customerInfoVO.email}}</td>

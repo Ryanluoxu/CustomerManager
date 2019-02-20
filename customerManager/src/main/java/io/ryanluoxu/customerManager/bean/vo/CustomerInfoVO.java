@@ -1,6 +1,8 @@
 package io.ryanluoxu.customerManager.bean.vo;
 
-public class CustomerInfoVO {
+import io.ryanluoxu.customerManager.bean.BaseBean;
+
+public class CustomerInfoVO extends BaseBean{
 	private Long customerInfoId;
 	private String customerName;
 	private String function;

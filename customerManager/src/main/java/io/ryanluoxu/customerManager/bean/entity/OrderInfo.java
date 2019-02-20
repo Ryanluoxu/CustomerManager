@@ -36,9 +36,33 @@ public class OrderInfo implements Serializable{
 	private double profit;
 	@Column(name="status")
 	private String status;
+	@Column(name="created_by")
+	private String createdBy;
 	@Column(name="created_date")
 	private Date createdDate;
+	@Column(name="updated_by")
+	private String updatedBy;
+	@Column(name="updated_date")
+	private Date updatedDate;
 	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
 	public Date getCreatedDate() {
 		return createdDate;
 	}

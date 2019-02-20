@@ -17,6 +17,10 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 		})
 	}
 	$scope.preview = function(){
+		if ($scope.productInfo.companyInfo == null) {
+			alert("please select company.");
+			return;
+		}
 		$scope.isPreview = true;
 	}
 	$scope.addOrUpdateProductInfo = function(productInfo) {
@@ -35,7 +39,7 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 			if (data.status == 'success') {
 				alert("success");
 				$scope.orderInfo = null;
-				$location.url("/productInfo");				
+				$location.url("/productInfo");
 			} else if (data.status == 'fail') {
 				alert(data.errorMsg);
 				$scope.isPreview = false;
@@ -51,7 +55,7 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 	$scope.editProductInfo = function(productInfoVO) {
 		$rootScope.productInfo = productInfoVO;
 		$rootScope.isEdit = true;
-		$location.url("/productInfo/addOrEdit");			
+		$location.url("/productInfo/addOrEdit");
 	}
 	$scope.deleteProductInfo = function(productInfoId) {
 		var isConfirmed = confirm("Are you sure to delete this record ?");
@@ -63,16 +67,16 @@ app.controller('productInfoController', function($scope, $http, $rootScope, $loc
 				if (data.status == 'success') {
 					alert("success");
 					$rootScope.productInfo = null;
-					$location.url("/productInfo");				
+					$location.url("/productInfo");
 				} else if (data.status == 'fail') {
 					alert(data.errorMsg);
 				}
 			}).error(function(data, status, headers, config) {
 				$scope.message = "fail";
-			})			
+			})
 		}
 	}
- 
+
 	$scope.isPreview = false;
 	$scope.findAllProductInfo();
 	$scope.findAllCompanyInfo();
