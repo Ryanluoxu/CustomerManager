@@ -21,6 +21,10 @@
 						<th scope="col">Unit Price</th>
 						<th scope="col">Quantity</th>
 						<th scope="col">Profit</th>
+						<th scope="col">Created By</th>
+						<th scope="col">Created Date</th>
+						<th scope="col">Updated By</th>
+						<th scope="col">Updated Date</th>
 						<th scope="col">Action</th>
 					</tr>
 				</thead>
@@ -33,6 +37,10 @@
                         <td>{{orderInfoVO.unitPrice}}</td>
                         <td>{{orderInfoVO.quantity}}</td>
                         <td>{{orderInfoVO.profit}}</td>
+						<td>{{orderInfoVO.createdBy}}</td>
+                        <td>{{orderInfoVO.createdDate}}</td>
+                        <td>{{orderInfoVO.updatedBy}}</td>
+                        <td>{{orderInfoVO.updatedDate}}</td>
                         <td><button class="btn btn-primary" ng-click="editOrderInfo(orderInfoVO)">Edit</button></td>
 					</tr>
 				</tbody>

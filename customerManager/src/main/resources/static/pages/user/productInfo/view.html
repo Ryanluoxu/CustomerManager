@@ -19,6 +19,10 @@
 						<th scope="col">Company Name</th>
 						<th scope="col">Min Price</th>
 						<th scope="col">Max Price</th>
+						<th scope="col">Created By</th>
+						<th scope="col">Created Date</th>
+						<th scope="col">Updated By</th>
+						<th scope="col">Updated Date</th>
 						<th scope="col">Action</th>
 					</tr>
 				</thead>
@@ -29,6 +33,10 @@
                         <td>{{productInfoVO.companyName}}</td>
                         <td>{{productInfoVO.minPrice}}</td>
                         <td>{{productInfoVO.maxPrice}}</td>
+                        <td>{{productInfoVO.createdBy}}</td>
+                        <td>{{productInfoVO.createdDate}}</td>
+                        <td>{{productInfoVO.updatedBy}}</td>
+                        <td>{{productInfoVO.updatedDate}}</td>
                         <td><button class="btn btn-primary" ng-click="editProductInfo(productInfoVO)">Edit</button></td>
 					</tr>
 				</tbody>

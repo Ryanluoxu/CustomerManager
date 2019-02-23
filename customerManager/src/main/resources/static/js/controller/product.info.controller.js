@@ -4,14 +4,22 @@
 app.controller('productInfoController', function($scope, $http, $rootScope, $location) {
 	$scope.findAllProductInfo = function() {
 		$http.get("/rest/productInfo/findAll").success(function(data, status, headers, config) {
-			$scope.productInfoVOs = data.data;
+			if (data.status == 'success') {
+				$scope.productInfoVOs = data.data;
+			} else if (data.status == 'fail') {
+				alert(data.errorMsg);
+			}
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
 		})
 	}
 	$scope.findAllCompanyInfo = function() {
 		$http.get("/rest/companyInfo/findAll").success(function(data, status, headers, config) {
-			$scope.companyInfoVOs = data.data;
+			if (data.status == 'success') {
+				$scope.companyInfoVOs = data.data;
+			} else if (data.status == 'fail') {
+				alert(data.errorMsg);
+			}
 		}).error(function(data, status, headers, config) {
 			$scope.message = status;
 		})

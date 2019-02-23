@@ -29,14 +29,14 @@ public class AuditTrail implements Serializable{
 	private String actionType;
 	@Column(name="created_date")
 	private Date createdDate;
-	@Column(name="user")
-	private String user;
-	
+	@Column(name="user_name")
+	private String userName;
+
 	public String getUserName() {
-		return user;
+		return userName;
 	}
 	public void setUserName(String userName) {
-		this.user = userName;
+		this.userName = userName;
 	}
 	public Long getAuditTrailId() {
 		return auditTrailId;

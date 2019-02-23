@@ -1,11 +1,14 @@
 package io.ryanluoxu.customerManager.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
 import io.ryanluoxu.customerManager.dao.CompanyInfoDao;
 import io.ryanluoxu.customerManager.service.CompanyInfoService;
@@ -19,11 +22,16 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
 	@Override
 	public CompanyInfo add(CompanyInfo companyInfo) {
+		companyInfo.setCreatedDate(new Date());
+		companyInfo.setCreatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
+		companyInfo.setStatus(StatusConstant.ACTIVE);
 		return companyInfoDao.add(companyInfo);
 	}
 
 	@Override
 	public CompanyInfo update(CompanyInfo companyInfo) {
+		companyInfo.setUpdatedDate(new Date());
+		companyInfo.setUpdatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
 		return companyInfoDao.update(companyInfo);
 	}
 

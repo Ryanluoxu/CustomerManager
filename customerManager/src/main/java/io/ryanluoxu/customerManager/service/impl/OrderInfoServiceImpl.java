@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,12 +23,15 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	@Override
 	public OrderInfo add(OrderInfo orderInfo) {
 		orderInfo.setCreatedDate(new Date());
+		orderInfo.setCreatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
 		orderInfo.setStatus(StatusConstant.ACTIVE);
 		return orderInfoDao.add(orderInfo);
 	}
 
 	@Override
 	public OrderInfo update(OrderInfo orderInfo) {
+		orderInfo.setUpdatedDate(new Date());
+		orderInfo.setUpdatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
 		return orderInfoDao.update(orderInfo);
 	}
 

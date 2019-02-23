@@ -1,14 +1,11 @@
 package io.ryanluoxu.customerManager.bean.input;
 
-import java.util.Date;
-
 public class UserInfoInput {
 
 	private Long userInfoId;
 	private String userName;
 	private String password;
 	private String status;
-	private Date createdDate;
 	private String role;
 
 	public String getRole() {
@@ -49,14 +46,6 @@ public class UserInfoInput {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
 	}
 
 }

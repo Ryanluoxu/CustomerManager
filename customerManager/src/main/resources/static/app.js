@@ -19,7 +19,12 @@ app.config(function($routeProvider) {
 		templateUrl : 'pages/user/user.html',
 		controller : 'userController'
 	})
-		
+	
+	.when('/auditTrail', {
+		templateUrl : 'pages/admin/auditTrail/view.html',
+		controller : 'auditTrailController'
+	})
+	
 	.when('/userInfo', {
 		templateUrl : 'pages/admin/userInfo/view.html',
 		controller : 'userInfoController'

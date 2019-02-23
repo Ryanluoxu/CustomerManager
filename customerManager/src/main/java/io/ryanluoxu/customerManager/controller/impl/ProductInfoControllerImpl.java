@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.base.exception.CommonException;
+import io.ryanluoxu.customerManager.base.util.DateTimeUtil;
+import io.ryanluoxu.customerManager.bean.entity.AuditTrail;
 import io.ryanluoxu.customerManager.bean.entity.CompanyInfo;
 import io.ryanluoxu.customerManager.bean.entity.ProductInfo;
 import io.ryanluoxu.customerManager.bean.input.ProductInfoInput;
@@ -16,7 +18,7 @@ import io.ryanluoxu.customerManager.controller.ProductInfoController;
 
 @Service
 public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, ProductInfoVO, ProductInfoInput> implements ProductInfoController {
-	
+
 	@Override
 	public List<ProductInfoVO> findAll() {
 		List<ProductInfoVO> productInfoVOs = new ArrayList<>();
@@ -25,6 +27,8 @@ public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, P
 			CompanyInfo companyInfo = companyInfoService.getById(productInfo.getCompanyInfoId());
 			ProductInfoVO productInfoVO = convertToVO(productInfo);
 			productInfoVO.setCompanyName(companyInfo.getCompanyName());
+			productInfoVO.setCreatedDate(DateTimeUtil.getString(productInfo.getCreatedDate()));
+			productInfoVO.setUpdatedDate(DateTimeUtil.getString(productInfo.getUpdatedDate()));
 			productInfoVOs.add(productInfoVO);
 		}
 		return productInfoVOs;
@@ -33,7 +37,7 @@ public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, P
 	@Override
 	public ProductInfoVO add(ProductInfoInput productInfoInput) {
 		ProductInfoVO productInfoVO = convertToVO(productInfoService.add(convertToBean(productInfoInput)));
-		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, productInfoVO.toString());
+		createAuditTrailForAdd(productInfoInput, productInfoVO);
 		return productInfoVO;
 	}
 
@@ -43,7 +47,7 @@ public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, P
 		productInfo.setCompanyInfoId(productInfoInput.getCompanyInfoId());
 		productInfo.setProductName(productInfoInput.getProductName());
 		ProductInfoVO productInfoVO = convertToVO(productInfoService.update(productInfo));
-		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_UPDATE, productInfoVO.toString());
+		createAuditTrailForUpdate(productInfoInput, productInfoVO);
 		return productInfoVO;
 	}
 
@@ -52,7 +56,7 @@ public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, P
 		ProductInfo productInfo = productInfoService.getById(productInfoInput.getProductInfoId());
 		productInfo.setStatus(StatusConstant.INACTIVE);
 		ProductInfoVO productInfoVO = convertToVO(productInfoService.update(productInfo));
-		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_DELETE, productInfoVO.toString());
+		createAuditTrailForDelete(productInfoInput, productInfoVO);
 		return productInfoVO;
 	}
 
@@ -68,6 +72,16 @@ public class ProductInfoControllerImpl extends BaseControllerImpl<ProductInfo, P
 		for (ProductInfo productInfo : productInfos) {
 			delete(convertToInput(productInfo));
 		}
+	}
+
+	private AuditTrail createAuditTrailForAdd(ProductInfoInput input, ProductInfoVO tVO) {
+		return auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, ProductInfo.class.getName(), tVO.getProductInfoId(), getLoginUserName());
+	}
+	private AuditTrail createAuditTrailForUpdate(ProductInfoInput input, ProductInfoVO tVO) {
+		return auditTrailService.add(ActionTypeConstant.ACTION_TYPE_UPDATE, ProductInfo.class.getName(), tVO.getProductInfoId(), getLoginUserName());
+	}
+	private AuditTrail createAuditTrailForDelete(ProductInfoInput input, ProductInfoVO tVO) {
+		return auditTrailService.add(ActionTypeConstant.ACTION_TYPE_DELETE, ProductInfo.class.getName(), tVO.getProductInfoId(), getLoginUserName());
 	}
 
 }

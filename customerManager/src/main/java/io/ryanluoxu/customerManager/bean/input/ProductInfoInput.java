@@ -1,7 +1,5 @@
 package io.ryanluoxu.customerManager.bean.input;
 
-import java.util.Date;
-
 import io.ryanluoxu.customerManager.bean.BaseBean;
 
 public class ProductInfoInput extends BaseBean{
@@ -10,10 +8,9 @@ public class ProductInfoInput extends BaseBean{
 	private Long companyInfoId;
 	private String productName;
 	private String status;
-	private Date createdDate;
 	private double minPrice;
 	private double maxPrice;
-	
+
 	public double getMinPrice() {
 		return minPrice;
 	}
@@ -50,11 +47,5 @@ public class ProductInfoInput extends BaseBean{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-	
+
 }

@@ -17,7 +17,7 @@ import io.ryanluoxu.customerManager.controller.UserInfoController;
 
 @Service
 public class UserInfoControllerImpl extends BaseControllerImpl<UserInfo, UserInfoVO, UserInfoInput> implements UserInfoController {
-	
+
 	@Override
 	public List<UserInfoVO> findAll() {
 		List<UserInfoVO> userInfoVOs = new ArrayList<>();
@@ -66,5 +66,6 @@ public class UserInfoControllerImpl extends BaseControllerImpl<UserInfo, UserInf
 		userInfoValidator.validateMandatoryFields(input, actionType);
 		userInfoValidator.validateInputValue(input, actionType);
 	}
+
 
 }

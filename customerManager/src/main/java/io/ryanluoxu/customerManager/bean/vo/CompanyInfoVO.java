@@ -8,7 +8,7 @@ public class CompanyInfoVO extends BaseBean{
 	private String companyName;
 	private String country;
 	private String status;
-	
+
 	public Long getCompanyInfoId() {
 		return companyInfoId;
 	}

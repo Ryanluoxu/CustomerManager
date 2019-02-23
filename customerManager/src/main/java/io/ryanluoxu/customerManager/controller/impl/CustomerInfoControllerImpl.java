@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.base.constant.CustomerInfoConstant;
 import io.ryanluoxu.customerManager.base.exception.CommonException;
+import io.ryanluoxu.customerManager.base.util.DateTimeUtil;
+import io.ryanluoxu.customerManager.bean.entity.AuditTrail;
 import io.ryanluoxu.customerManager.bean.entity.CustomerInfo;
+import io.ryanluoxu.customerManager.bean.entity.ProductInfo;
 import io.ryanluoxu.customerManager.bean.input.CustomerInfoInput;
 import io.ryanluoxu.customerManager.bean.vo.CustomerInfoVO;
 import io.ryanluoxu.customerManager.controller.CustomerInfoController;
@@ -28,7 +31,7 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 	@Override
 	public CustomerInfoVO add(CustomerInfoInput customerInfoInput) {
 		CustomerInfoVO customerInfoVO = convertToVO(customerInfoService.add(convertToBean(customerInfoInput)));
-		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, customerInfoVO.toString());
+		createAuditTrailForAdd(customerInfoInput, customerInfoVO);
 		return customerInfoVO;
 	}
 
@@ -37,7 +40,7 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 		CustomerInfo customerInfo = customerInfoService.getById(customerInfoInput.getCustomerInfoId());
 		customerInfo.setStatus(CustomerInfoConstant.STATUS_INACTIVE);
 		CustomerInfoVO customerInfoVO = convertToVO(customerInfoService.update(customerInfo));
-		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_DELETE, customerInfoVO.toString());
+		createAuditTrailForDelete(customerInfoInput, customerInfoVO);
 		return customerInfoVO;
 	}
 
@@ -54,7 +57,7 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 		customerInfo.setEmail(customerInfoInput.getEmail());
 		customerInfo.setFunction(customerInfoInput.getFunction());
 		CustomerInfoVO customerInfoVO = convertToVO(customerInfoService.update(customerInfo));
-		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_UPDATE, customerInfoVO.toString());
+		createAuditTrailForUpdate(customerInfoInput, customerInfoVO);
 		return customerInfoVO;
 	}
 
@@ -64,6 +67,8 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 		List<CustomerInfo> customerInfos = customerInfoService.findActive();
 		for (CustomerInfo customerInfo : customerInfos) {
 			CustomerInfoVO customerInfoVO = convertToVO(customerInfo);
+			customerInfoVO.setCreatedDate(DateTimeUtil.getString(customerInfo.getCreatedDate()));
+			customerInfoVO.setUpdatedDate(DateTimeUtil.getString(customerInfo.getUpdatedDate()));
 			customerInfoVOs.add(customerInfoVO);
 		}
 		return customerInfoVOs;
@@ -75,5 +80,14 @@ public class CustomerInfoControllerImpl extends BaseControllerImpl<CustomerInfo,
 		customerInfoValidator.validateInputValue(input, actionType);
 	}
 
+	private AuditTrail createAuditTrailForAdd(CustomerInfoInput input, CustomerInfoVO tVO) {
+		return auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, ProductInfo.class.getName(), tVO.getCustomerInfoId(), getLoginUserName());
+	}
+	private AuditTrail createAuditTrailForUpdate(CustomerInfoInput input, CustomerInfoVO tVO) {
+		return auditTrailService.add(ActionTypeConstant.ACTION_TYPE_UPDATE, ProductInfo.class.getName(), tVO.getCustomerInfoId(), getLoginUserName());
+	}
+	private AuditTrail createAuditTrailForDelete(CustomerInfoInput input, CustomerInfoVO tVO) {
+		return auditTrailService.add(ActionTypeConstant.ACTION_TYPE_DELETE, ProductInfo.class.getName(), tVO.getCustomerInfoId(), getLoginUserName());
+	}
 
 }

@@ -24,6 +24,10 @@
 						<th scope="col">Office  Number</th>
 						<th scope="col">Fax Number</th>
 						<th scope="col">Address</th>
+						<th scope="col">Created By</th>
+						<th scope="col">Created Date</th>
+						<th scope="col">Updated By</th>
+						<th scope="col">Updated Date</th>
 						<th scope="col">Action</th>
 					</tr>
 				</thead>
@@ -39,6 +43,10 @@
                         <td>{{customerInfoVO.contactOffice}}</td>
                         <td>{{customerInfoVO.contactFax}}</td>
                         <td>{{customerInfoVO.address}}</td>
+						<td>{{customerInfoVO.createdBy}}</td>
+                        <td>{{customerInfoVO.createdDate}}</td>
+                        <td>{{customerInfoVO.updatedBy}}</td>
+                        <td>{{customerInfoVO.updatedDate}}</td>
                         <td><button class="btn btn-primary" ng-click="editCustomerInfo(customerInfoVO)">Edit</button></td>
 					</tr>
 				</tbody>

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import io.ryanluoxu.customerManager.base.constant.ActionTypeConstant;
 import io.ryanluoxu.customerManager.base.constant.StatusConstant;
 import io.ryanluoxu.customerManager.base.exception.CommonException;
+import io.ryanluoxu.customerManager.base.util.DateTimeUtil;
+import io.ryanluoxu.customerManager.bean.entity.AuditTrail;
 import io.ryanluoxu.customerManager.bean.entity.CustomerInfo;
 import io.ryanluoxu.customerManager.bean.entity.OrderInfo;
 import io.ryanluoxu.customerManager.bean.entity.ProductInfo;
@@ -17,7 +19,7 @@ import io.ryanluoxu.customerManager.controller.OrderInfoController;
 
 @Service
 public class OrderInfoControllerImpl extends BaseControllerImpl<OrderInfo, OrderInfoVO, OrderInfoInput> implements OrderInfoController {
-	
+
 	@Override
 	public List<OrderInfoVO> findAll() {
 		List<OrderInfoVO> orderInfoVOs = new ArrayList<>();
@@ -31,7 +33,7 @@ public class OrderInfoControllerImpl extends BaseControllerImpl<OrderInfo, Order
 	@Override
 	public OrderInfoVO add(OrderInfoInput orderInfoInput) {
 		OrderInfoVO orderInfoVO = convertToVO(orderInfoService.add(convertToBean(orderInfoInput)));
-		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, orderInfoVO.toString());
+		createAuditTrailForAdd(orderInfoInput, orderInfoVO);
 		return orderInfoVO;
 	}
 
@@ -45,7 +47,7 @@ public class OrderInfoControllerImpl extends BaseControllerImpl<OrderInfo, Order
 		orderInfo.setQuantity(orderInfoInput.getQuantity());
 		orderInfo.setUnitPrice(orderInfoInput.getUnitPrice());
 		OrderInfoVO orderInfoVO = convertToVO(orderInfoService.update(orderInfo));
-		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_UPDATE, orderInfoVO.toString());
+		createAuditTrailForUpdate(orderInfoInput, orderInfoVO);
 		return orderInfoVO;
 	}
 
@@ -54,7 +56,7 @@ public class OrderInfoControllerImpl extends BaseControllerImpl<OrderInfo, Order
 		OrderInfo orderInfo = orderInfoService.getById(orderInfoInput.getOrderInfoId());
 		orderInfo.setStatus(StatusConstant.INACTIVE);
 		OrderInfoVO orderInfoVO = convertToVO(orderInfoService.update(orderInfo));
-		auditTrailService.add(ActionTypeConstant.ACTION_TYPE_DELETE, orderInfoVO.toString());
+		createAuditTrailForDelete(orderInfoInput, orderInfoVO);
 		return orderInfoVO;
 	}
 
@@ -80,7 +82,18 @@ public class OrderInfoControllerImpl extends BaseControllerImpl<OrderInfo, Order
 		CustomerInfo customerInfo = customerInfoService.getById(orderInfo.getCustomerInfoId());
 		orderInfoVO.setCustomerName(customerInfo.getCustomerName());
 		orderInfoVO.setProductName(productInfo.getProductName());
+		orderInfoVO.setCreatedDate(DateTimeUtil.getString(orderInfo.getCreatedDate()));
+		orderInfoVO.setUpdatedDate(DateTimeUtil.getString(orderInfo.getUpdatedDate()));
 		return orderInfoVO;
+	}
+	private AuditTrail createAuditTrailForAdd(OrderInfoInput input, OrderInfoVO tVO) {
+		return auditTrailService.add(ActionTypeConstant.ACTION_TYPE_ADD, ProductInfo.class.getName(), tVO.getOrderInfoId(), getLoginUserName());
+	}
+	private AuditTrail createAuditTrailForUpdate(OrderInfoInput input, OrderInfoVO tVO) {
+		return auditTrailService.add(ActionTypeConstant.ACTION_TYPE_UPDATE, ProductInfo.class.getName(), tVO.getOrderInfoId(), getLoginUserName());
+	}
+	private AuditTrail createAuditTrailForDelete(OrderInfoInput input, OrderInfoVO tVO) {
+		return auditTrailService.add(ActionTypeConstant.ACTION_TYPE_DELETE, ProductInfo.class.getName(), tVO.getOrderInfoId(), getLoginUserName());
 	}
 
 }

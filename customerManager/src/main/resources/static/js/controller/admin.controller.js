@@ -7,6 +7,9 @@ app.controller('adminController', function($scope, $http, $location, $rootScope)
 	$scope.showUserInfo = function() {
 		$location.url("/userInfo")
 	}
+	$scope.showAuditTrail   = function(){
+		$location.url("/auditTrail")
+	}
 	$scope.goHome = function() {
 		$location.url("/")
 	}

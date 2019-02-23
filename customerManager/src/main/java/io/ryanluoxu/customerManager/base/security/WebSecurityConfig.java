@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/pages/user/**").hasRole(RoleConstant.USER)
 				.antMatchers("/pages/admin/**").hasRole(RoleConstant.ADMIN)
 				// restrict rest api
-				.antMatchers("/rest/userInfo/**").hasRole(RoleConstant.ADMIN)
+				.antMatchers("/rest/userInfo/**","/rest/auditTrail/**").hasRole(RoleConstant.ADMIN)
 				.antMatchers("/rest/**").hasRole(RoleConstant.USER);
 
 		http.formLogin()

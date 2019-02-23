@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.ryanluoxu.customerManager.base.util.ActionUtil;
 import io.ryanluoxu.customerManager.bean.entity.AuditTrail;
 import io.ryanluoxu.customerManager.dao.AuditTrailDao;
 import io.ryanluoxu.customerManager.service.AuditTrailService;
@@ -60,6 +61,21 @@ public class AuditTrailServiceImpl implements AuditTrailService {
 	@Override
 	public AuditTrail getActive(Long id) {
 		return null;
+	}
+
+	@Override
+	public AuditTrail add(String actionType, String action, String loginUserName) {
+		AuditTrail auditTrail = new AuditTrail();
+		auditTrail.setAction(action);
+		auditTrail.setActionType(actionType);
+		auditTrail.setUserName(loginUserName);
+		return add(auditTrail);
+	}
+
+	@Override
+	public AuditTrail add(String actionType, String className, Long companyInfoId, String loginUserName) {
+		String action = ActionUtil.getString(actionType, className, companyInfoId, loginUserName);
+		return add(actionType, action, loginUserName);
 	}
 
 }
